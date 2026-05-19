@@ -401,26 +401,6 @@ traitlexicon resolve "red color" --taxon Arabidopsis --organ flower
 
 ---
 
-## Relationship to Pheno2Geno
-
-**TraitLexicon** should remain the name of this specific repository.
-
-**Pheno2Geno** is better reserved as a future umbrella ecosystem name.
-
-Possible future ecosystem:
-
-```text
-Pheno2Geno/
-├── TraitLexicon/
-├── PhenoSieve/
-├── downstream-ranking-tools/
-└── visualization-or-reporting-tools/
-```
-
-This keeps TraitLexicon focused and conceptually clean.
-
----
-
 ## Author
 
 **Adhityo Wicaksono**
