@@ -1,0 +1,279 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/your-username/TraitLexicon/schema/trait_entry.schema.json",
+  "title": "TraitLexicon Trait Entry Schema",
+  "description": "Schema for TraitLexicon trait entry YAML files. Trait entries map human-readable trait phrases to one or more candidate modules.",
+  "type": "object",
+  "required": [
+    "trait_id",
+    "canonical_name",
+    "trait_category",
+    "kingdom_scope",
+    "input_phrases",
+    "candidate_modules",
+    "curation"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "trait_id": {
+      "type": "string",
+      "pattern": "^TLX-TRAIT-[A-Z]+-[A-Z0-9_]+-[0-9]{4}$",
+      "description": "Stable TraitLexicon trait identifier."
+    },
+    "canonical_name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Preferred human-readable trait phrase."
+    },
+    "trait_category": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Broad category such as aroma, pigmentation, stress_tolerance, biofuel, enzymes, or secondary_metabolites."
+    },
+    "kingdom_scope": {
+      "type": "string",
+      "enum": [
+        "plant",
+        "algae",
+        "fungi",
+        "cross_kingdom"
+      ],
+      "description": "Primary organismal scope of the trait entry."
+    },
+    "description": {
+      "type": "string",
+      "description": "Brief explanation of the trait entry."
+    },
+    "input_phrases": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "description": "Synonymous or related natural-language trait phrases."
+    },
+    "recommended_context": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "taxon": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "organ": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tissue": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "developmental_stage": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "stress_condition": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "trait_application": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "phenotype_context": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Recommended biological context for interpreting the trait phrase."
+    },
+    "candidate_modules": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "module_id",
+          "module_name",
+          "confidence"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "module_id": {
+            "type": "string",
+            "pattern": "^TLX-MODULE-[A-Z]+-[A-Z0-9_]+-[0-9]{4}$"
+          },
+          "module_name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "confidence": {
+            "type": "string",
+            "enum": [
+              "high",
+              "medium",
+              "low",
+              "exploratory",
+              "context_dependent"
+            ]
+          },
+          "relationship": {
+            "type": "string",
+            "description": "Relationship of the module to the trait, e.g. primary_candidate_module or pathway_level_candidate_module."
+          },
+          "use_when": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "context_note": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Candidate modules associated with the trait phrase."
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Cautions about ambiguity, biological context, or evidence limitations."
+    },
+    "phenosieve_export": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "recommended_module_file": {
+          "type": "string"
+        },
+        "recommended_combined_module": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Suggested downstream PhenoSieve-compatible module file or module bundle."
+    },
+    "legacy_source": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "source_type": {
+          "type": "string"
+        },
+        "reused_as": {
+          "type": "string"
+        },
+        "verbatim_text_reused": {
+          "type": "boolean"
+        },
+        "requires_independent_verification": {
+          "type": "boolean"
+        }
+      }
+    },
+    "references": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/reference"
+      }
+    },
+    "curation": {
+      "$ref": "#/$defs/curation"
+    }
+  },
+  "$defs": {
+    "curation": {
+      "type": "object",
+      "required": [
+        "status",
+        "version"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "seed",
+            "seed_recurated_from_legacy_catalog",
+            "needs_literature_verification",
+            "literature_supported",
+            "reviewed",
+            "deprecated"
+          ]
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "needs_literature_verification": {
+          "type": "boolean"
+        },
+        "references_added": {
+          "type": "boolean"
+        },
+        "ai_assisted": {
+          "type": "boolean"
+        },
+        "human_review_required": {
+          "type": "boolean"
+        },
+        "reviewed_by_human": {
+          "type": "boolean"
+        },
+        "curator": {
+          "type": "string"
+        },
+        "last_updated": {
+          "type": "string"
+        }
+      }
+    },
+    "reference": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "citation_key": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "authors": {
+          "type": "string"
+        },
+        "year": {
+          "type": [
+            "string",
+            "integer"
+          ]
+        },
+        "doi": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "note": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

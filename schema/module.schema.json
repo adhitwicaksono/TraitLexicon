@@ -1,0 +1,348 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/your-username/TraitLexicon/schema/module.schema.json",
+  "title": "TraitLexicon Module Definition Schema",
+  "description": "Schema for TraitLexicon module definition YAML files. Module definitions describe candidate genes, pathways, annotation terms, evidence levels, context rules, and PhenoSieve compatibility.",
+  "type": "object",
+  "required": [
+    "module_id",
+    "module_name",
+    "display_name",
+    "module_category",
+    "kingdom_scope",
+    "evidence_level",
+    "curation"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "module_id": {
+      "type": "string",
+      "pattern": "^TLX-MODULE-[A-Z]+-[A-Z0-9_]+-[0-9]{4}$"
+    },
+    "module_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "display_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "module_category": {
+      "type": "string",
+      "minLength": 1
+    },
+    "kingdom_scope": {
+      "type": "string",
+      "enum": [
+        "plant",
+        "algae",
+        "fungi",
+        "cross_kingdom"
+      ]
+    },
+    "description": {
+      "type": "string"
+    },
+    "biological_process": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "core_genes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/gene_entry"
+      }
+    },
+    "supporting_genes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/gene_entry"
+      }
+    },
+    "pathway_keywords": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "annotation_queries": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "gene_symbols": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "keywords": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "domains": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "go_terms": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "kegg_terms": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "pfam_terms": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "interpro_terms": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "orthology": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "preferred_reference_taxa": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "expected_copy_behavior": {
+          "type": "string"
+        },
+        "orthology_notes": {
+          "type": "string"
+        }
+      }
+    },
+    "context_rules": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "include_if": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "caution_if": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "exclude_if": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      }
+    },
+    "evidence_level": {
+      "type": "string",
+      "enum": [
+        "causal",
+        "strong_association",
+        "pathway_supported",
+        "orthology_inferred",
+        "expression_supported",
+        "morphology_inferred",
+        "exploratory"
+      ]
+    },
+    "causal_status": {
+      "type": "string",
+      "enum": [
+        "known_causal_gene",
+        "known_major_candidate",
+        "known_major_candidate_in_specific_taxon",
+        "pathway_level_candidate",
+        "associated_candidate",
+        "orthology_based_candidate",
+        "omics_supported_candidate",
+        "morphology_based_candidate",
+        "hypothesis_generating_candidate",
+        "unknown"
+      ]
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "phenosieve_compatibility": {
+      "type": "object",
+      "required": [
+        "export_ready"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "export_ready": {
+          "type": "boolean"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "required_fields": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "suggested_output_name": {
+          "type": "string"
+        }
+      }
+    },
+    "legacy_source": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "source_type": {
+          "type": "string"
+        },
+        "reused_as": {
+          "type": "string"
+        },
+        "verbatim_text_reused": {
+          "type": "boolean"
+        },
+        "requires_independent_verification": {
+          "type": "boolean"
+        }
+      }
+    },
+    "references": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/reference"
+      }
+    },
+    "curation": {
+      "$ref": "#/$defs/curation"
+    }
+  },
+  "$defs": {
+    "gene_entry": {
+      "type": "object",
+      "required": [
+        "symbol"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "symbol": {
+          "type": "string",
+          "minLength": 1
+        },
+        "full_name": {
+          "type": "string"
+        },
+        "aliases": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "expected_role": {
+          "type": "string"
+        },
+        "interpretation": {
+          "type": "string"
+        },
+        "caution": {
+          "type": "string"
+        }
+      }
+    },
+    "curation": {
+      "type": "object",
+      "required": [
+        "status",
+        "version"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "seed",
+            "seed_recurated_from_legacy_catalog",
+            "needs_literature_verification",
+            "literature_supported",
+            "reviewed",
+            "deprecated"
+          ]
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "needs_literature_verification": {
+          "type": "boolean"
+        },
+        "references_added": {
+          "type": "boolean"
+        },
+        "ai_assisted": {
+          "type": "boolean"
+        },
+        "human_review_required": {
+          "type": "boolean"
+        },
+        "reviewed_by_human": {
+          "type": "boolean"
+        },
+        "curator": {
+          "type": "string"
+        },
+        "last_updated": {
+          "type": "string"
+        }
+      }
+    },
+    "reference": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "citation_key": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "authors": {
+          "type": "string"
+        },
+        "year": {
+          "type": [
+            "string",
+            "integer"
+          ]
+        },
+        "doi": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "note": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

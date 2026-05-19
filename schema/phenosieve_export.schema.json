@@ -1,0 +1,138 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/your-username/TraitLexicon/schema/phenosieve_export.schema.json",
+  "title": "TraitLexicon PhenoSieve Export Schema",
+  "description": "Draft schema for PhenoSieve-compatible module export files generated from TraitLexicon module definitions.",
+  "type": "object",
+  "required": [
+    "export_id",
+    "source_module_id",
+    "module_name",
+    "kingdom_scope",
+    "query_terms",
+    "curation"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "export_id": {
+      "type": "string"
+    },
+    "source_module_id": {
+      "type": "string",
+      "pattern": "^TLX-MODULE-[A-Z]+-[A-Z0-9_]+-[0-9]{4}$"
+    },
+    "module_name": {
+      "type": "string"
+    },
+    "kingdom_scope": {
+      "type": "string",
+      "enum": [
+        "plant",
+        "algae",
+        "fungi",
+        "cross_kingdom"
+      ]
+    },
+    "query_terms": {
+      "type": "object",
+      "required": [
+        "gene_symbols",
+        "keywords"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "gene_symbols": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "keywords": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "domains": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "go_terms": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "kegg_terms": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "recommended_inputs": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "annotation_files": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "orthogroups": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "fasta": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "expected_outputs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "curation": {
+      "type": "object",
+      "required": [
+        "status",
+        "version"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "needs_literature_verification": {
+          "type": "boolean"
+        },
+        "ai_assisted": {
+          "type": "boolean"
+        },
+        "human_review_required": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}
