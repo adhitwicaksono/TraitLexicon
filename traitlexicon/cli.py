@@ -1,20 +1,17 @@
 """
 Command-line interface for TraitLexicon.
 
-v0.1 commands:
+Core commands:
 
     traitlexicon resolve "fragrant rice"
     traitlexicon list-traits
     traitlexicon list-modules
+    traitlexicon show-trait TLX-TRAIT-PLANT-AROMA-0001
+    traitlexicon show-module BADH2
+    traitlexicon export-module BADH2 --output data/phenosieve_exports/badh2.phenosieve.yaml
+    traitlexicon scaffold-trait "fragrant rice" --kingdom plant --category aroma --output draft.yaml
+    traitlexicon scaffold-module badh2_2ap_aroma_module --display-name "BADH2 aroma module" --kingdom plant --category aroma --gene BADH2
     traitlexicon validate
-
-The pyproject created earlier includes:
-
-    traitlexicon-validate = "traitlexicon.cli:validate_main"
-
-For the full CLI, add this to pyproject.toml later:
-
-    traitlexicon = "traitlexicon.cli:main"
 """
 
 from __future__ import annotations
@@ -25,8 +22,11 @@ import sys
 from pathlib import Path
 from typing import Any, Dict, List
 
+from .exporter import export_module_to_file, module_to_phenosieve_export, write_yaml
+from .indexer import find_module, find_trait, list_module_summary, list_trait_summary
 from .loader import load_module_definitions, load_trait_entries
 from .resolver import resolve_trait_phrase
+from .scaffold import make_module_template, make_trait_template, slugify, write_yaml_template
 from .validator import validate_repo
 
 
@@ -78,19 +78,7 @@ def cmd_resolve(args: argparse.Namespace) -> int:
 
 def cmd_list_traits(args: argparse.Namespace) -> int:
     """List trait entries."""
-    entries = load_trait_entries(args.repo)
-
-    rows: List[Dict[str, Any]] = []
-    for entry in entries:
-        rows.append(
-            {
-                "trait_id": entry.get("trait_id"),
-                "canonical_name": entry.get("canonical_name"),
-                "trait_category": entry.get("trait_category"),
-                "kingdom_scope": entry.get("kingdom_scope"),
-                "file": entry.get("_file"),
-            }
-        )
+    rows = list_trait_summary(args.repo)
 
     if args.json:
         print_json(rows)
@@ -100,6 +88,7 @@ def cmd_list_traits(args: argparse.Namespace) -> int:
     print("-" * 72)
     for row in rows:
         print(f"{row['trait_id']} | {row['kingdom_scope']} | {row['canonical_name']}")
+        print(f"  candidate modules: {row['candidate_module_count']}")
         print(f"  {row['file']}")
 
     return 0
@@ -107,21 +96,7 @@ def cmd_list_traits(args: argparse.Namespace) -> int:
 
 def cmd_list_modules(args: argparse.Namespace) -> int:
     """List module definitions."""
-    modules = load_module_definitions(args.repo)
-
-    rows: List[Dict[str, Any]] = []
-    for module in modules:
-        rows.append(
-            {
-                "module_id": module.get("module_id"),
-                "module_name": module.get("module_name"),
-                "display_name": module.get("display_name"),
-                "module_category": module.get("module_category"),
-                "kingdom_scope": module.get("kingdom_scope"),
-                "evidence_level": module.get("evidence_level"),
-                "file": module.get("_file"),
-            }
-        )
+    rows = list_module_summary(args.repo)
 
     if args.json:
         print_json(rows)
@@ -134,8 +109,167 @@ def cmd_list_modules(args: argparse.Namespace) -> int:
             f"{row['module_id']} | {row['kingdom_scope']} | "
             f"{row['module_name']} | evidence={row['evidence_level']}"
         )
+        print(f"  core genes: {row['core_gene_count']}")
         print(f"  {row['file']}")
 
+    return 0
+
+
+def cmd_show_trait(args: argparse.Namespace) -> int:
+    """Show one trait entry."""
+    entry = find_trait(args.identifier, repo_root=args.repo)
+
+    if entry is None:
+        print(f"Trait entry not found: {args.identifier}")
+        return 1
+
+    if args.json:
+        print_json(entry)
+        return 0
+
+    print(f"Trait: {entry.get('canonical_name')}")
+    print("-" * 72)
+    print(f"Trait ID: {entry.get('trait_id')}")
+    print(f"Kingdom: {entry.get('kingdom_scope')}")
+    print(f"Category: {entry.get('trait_category')}")
+    print(f"File: {entry.get('_file')}")
+    print()
+    print("Input phrases:")
+    for phrase in entry.get("input_phrases", []) or []:
+        print(f"  - {phrase}")
+    print()
+    print("Candidate modules:")
+    for module in entry.get("candidate_modules", []) or []:
+        print(f"  - {module.get('module_name')} ({module.get('module_id')})")
+        print(f"    confidence: {module.get('confidence')}")
+        if module.get("relationship"):
+            print(f"    relationship: {module.get('relationship')}")
+
+    warnings = entry.get("warnings", []) or []
+    if warnings:
+        print()
+        print("Warnings:")
+        for warning in warnings:
+            print(f"  - {warning}")
+
+    return 0
+
+
+def cmd_show_module(args: argparse.Namespace) -> int:
+    """Show one module definition."""
+    module = find_module(args.identifier, repo_root=args.repo)
+
+    if module is None:
+        print(f"Module not found: {args.identifier}")
+        return 1
+
+    if args.json:
+        print_json(module)
+        return 0
+
+    print(f"Module: {module.get('display_name') or module.get('module_name')}")
+    print("-" * 72)
+    print(f"Module ID: {module.get('module_id')}")
+    print(f"Module name: {module.get('module_name')}")
+    print(f"Kingdom: {module.get('kingdom_scope')}")
+    print(f"Category: {module.get('module_category')}")
+    print(f"Evidence level: {module.get('evidence_level')}")
+    print(f"Causal status: {module.get('causal_status')}")
+    print(f"File: {module.get('_file')}")
+    print()
+
+    if module.get("description"):
+        print("Description:")
+        print(module.get("description"))
+        print()
+
+    print("Core genes:")
+    for gene in module.get("core_genes", []) or []:
+        print(f"  - {gene.get('symbol')}")
+        if gene.get("full_name"):
+            print(f"    full name: {gene.get('full_name')}")
+        if gene.get("expected_role"):
+            print(f"    role: {gene.get('expected_role')}")
+
+    keywords = module.get("pathway_keywords", []) or []
+    if keywords:
+        print()
+        print("Pathway keywords:")
+        for keyword in keywords:
+            print(f"  - {keyword}")
+
+    warnings = module.get("warnings", []) or []
+    if warnings:
+        print()
+        print("Warnings:")
+        for warning in warnings:
+            print(f"  - {warning}")
+
+    return 0
+
+
+def cmd_export_module(args: argparse.Namespace) -> int:
+    """Export one module into PhenoSieve-compatible YAML."""
+    module = find_module(args.identifier, repo_root=args.repo)
+
+    if module is None:
+        print(f"Module not found: {args.identifier}")
+        return 1
+
+    export = module_to_phenosieve_export(module)
+
+    if args.json:
+        print_json(export)
+        return 0
+
+    output = args.output
+    if output is None:
+        module_name = module.get("module_name", "module_export")
+        output = Path("data") / "phenosieve_exports" / f"{module_name}.phenosieve.yaml"
+
+    root = Path(args.repo).resolve()
+    output_path = Path(output)
+    if not output_path.is_absolute():
+        output_path = root / output_path
+
+    write_yaml(export, output_path)
+    print(f"Wrote PhenoSieve export: {output_path}")
+    return 0
+
+
+def cmd_scaffold_trait(args: argparse.Namespace) -> int:
+    """Create a scaffold trait-entry YAML."""
+    module_name = args.module_name or f"{slugify(args.name)}_module"
+
+    data = make_trait_template(
+        canonical_name=args.name,
+        kingdom_scope=args.kingdom,
+        trait_category=args.category,
+        trait_id=args.trait_id,
+        module_id=args.module_id,
+        module_name=module_name,
+    )
+
+    output = Path(args.output)
+    write_yaml_template(data, output)
+    print(f"Wrote trait scaffold: {output}")
+    return 0
+
+
+def cmd_scaffold_module(args: argparse.Namespace) -> int:
+    """Create a scaffold module-definition YAML."""
+    data = make_module_template(
+        module_name=args.name,
+        display_name=args.display_name,
+        kingdom_scope=args.kingdom,
+        module_category=args.category,
+        module_id=args.module_id,
+        core_gene_symbols=args.gene or [],
+    )
+
+    output = Path(args.output)
+    write_yaml_template(data, output)
+    print(f"Wrote module scaffold: {output}")
     return 0
 
 
@@ -184,6 +318,45 @@ def build_parser() -> argparse.ArgumentParser:
     list_modules = subparsers.add_parser("list-modules", help="List module definitions.")
     list_modules.add_argument("--json", action="store_true", help="Print JSON output.")
     list_modules.set_defaults(func=cmd_list_modules)
+
+    show_trait = subparsers.add_parser("show-trait", help="Show one trait entry.")
+    show_trait.add_argument("identifier", help="Trait ID, canonical name, or input phrase.")
+    show_trait.add_argument("--json", action="store_true", help="Print JSON output.")
+    show_trait.set_defaults(func=cmd_show_trait)
+
+    show_module = subparsers.add_parser("show-module", help="Show one module definition.")
+    show_module.add_argument("identifier", help="Module ID, module name, display name, or core gene alias.")
+    show_module.add_argument("--json", action="store_true", help="Print JSON output.")
+    show_module.set_defaults(func=cmd_show_module)
+
+    export_module = subparsers.add_parser(
+        "export-module",
+        help="Export one module definition to PhenoSieve-compatible YAML.",
+    )
+    export_module.add_argument("identifier", help="Module ID, module name, display name, or gene alias.")
+    export_module.add_argument("--output", help="Output YAML path.")
+    export_module.add_argument("--json", action="store_true", help="Print JSON output instead of writing YAML.")
+    export_module.set_defaults(func=cmd_export_module)
+
+    scaffold_trait = subparsers.add_parser("scaffold-trait", help="Create a new trait-entry YAML scaffold.")
+    scaffold_trait.add_argument("name", help='Canonical trait name, e.g. "fragrant rice".')
+    scaffold_trait.add_argument("--kingdom", required=True, choices=["plant", "algae", "fungi", "cross_kingdom"])
+    scaffold_trait.add_argument("--category", required=True, help="Trait category.")
+    scaffold_trait.add_argument("--trait-id", default="TLX-TRAIT-PLACEHOLDER-0000")
+    scaffold_trait.add_argument("--module-id", default="TLX-MODULE-PLACEHOLDER-0000")
+    scaffold_trait.add_argument("--module-name", help="Linked candidate module name.")
+    scaffold_trait.add_argument("--output", required=True, help="Output YAML path.")
+    scaffold_trait.set_defaults(func=cmd_scaffold_trait)
+
+    scaffold_module = subparsers.add_parser("scaffold-module", help="Create a new module-definition YAML scaffold.")
+    scaffold_module.add_argument("name", help="Module name in snake_case.")
+    scaffold_module.add_argument("--display-name", required=True, help="Human-readable display name.")
+    scaffold_module.add_argument("--kingdom", required=True, choices=["plant", "algae", "fungi", "cross_kingdom"])
+    scaffold_module.add_argument("--category", required=True, help="Module category.")
+    scaffold_module.add_argument("--module-id", default="TLX-MODULE-PLACEHOLDER-0000")
+    scaffold_module.add_argument("--gene", action="append", help="Core gene symbol. Can be used multiple times.")
+    scaffold_module.add_argument("--output", required=True, help="Output YAML path.")
+    scaffold_module.set_defaults(func=cmd_scaffold_module)
 
     validate = subparsers.add_parser("validate", help="Validate YAML files against schemas.")
     validate.add_argument(
