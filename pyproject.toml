@@ -1,0 +1,65 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "traitlexicon"
+version = "0.1.0"
+description = "A context-aware trait-to-module dictionary for plants, algae, and fungi."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [
+  { name = "Adhityo Wicaksono" }
+]
+keywords = [
+  "bioinformatics",
+  "trait curation",
+  "plant genomics",
+  "algae genomics",
+  "fungal genomics",
+  "comparative genomics",
+  "gene modules",
+  "pathway modules"
+]
+classifiers = [
+  "Development Status :: 2 - Pre-Alpha",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Scientific/Engineering :: Bio-Informatics"
+]
+
+dependencies = [
+  "pyyaml>=6.0",
+  "jsonschema>=4.0"
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0",
+  "ruff>=0.4.0"
+]
+
+[project.urls]
+Homepage = "https://github.com/your-username/TraitLexicon"
+Repository = "https://github.com/your-username/TraitLexicon"
+Issues = "https://github.com/your-username/TraitLexicon/issues"
+
+[project.scripts]
+traitlexicon-validate = "traitlexicon.cli:validate_main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["traitlexicon*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+message: "If you use TraitLexicon, please cite it using the metadata below."
+title: "TraitLexicon: A context-aware trait-to-module dictionary for plants, algae, and fungi"
+version: "0.1.0"
+date-released: "2026-05-19"
+type: software
+authors:
+  - family-names: "Wicaksono"
+    given-names: "Adhityo"
+abstract: >
+  TraitLexicon is a curated, context-aware trait-to-module dictionary that
+  translates human-readable biological trait phrases into standardized candidate
+  gene/pathway module definitions for plants, algae, and fungi. It is designed
+  as an upstream interpretation layer for downstream tools such as PhenoSieve.
+keywords:
+  - bioinformatics
+  - trait curation
+  - plant genomics
+  - algae genomics
+  - fungal genomics
+  - comparative genomics
+  - gene modules
+  - pathway modules
+  - PhenoSieve
+license: MIT
+repository-code: "https://github.com/your-username/TraitLexicon"
