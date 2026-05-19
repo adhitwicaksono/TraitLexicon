@@ -1,0 +1,78 @@
+module_id: TLX-MODULE-PLANT-PIGMENT-0002
+module_name: carotenoid_core_module
+display_name: Carotenoid biosynthesis core module
+kingdom_scope: plant
+module_category: pigmentation
+
+biological_process:
+  - carotenoid biosynthesis
+  - yellow-orange pigmentation
+  - provitamin A-associated metabolism
+
+core_genes:
+  - symbol: PSY
+    full_name: phytoene synthase
+    expected_role: carotenoid_committed_step
+  - symbol: PDS
+    full_name: phytoene desaturase
+    expected_role: carotenoid_desaturation
+  - symbol: ZDS
+    full_name: zeta-carotene desaturase
+    expected_role: carotenoid_desaturation
+  - symbol: LCYB
+    full_name: lycopene beta-cyclase
+    expected_role: carotenoid_branching
+  - symbol: BCH
+    full_name: beta-carotene hydroxylase
+    expected_role: xanthophyll_biosynthesis
+
+pathway_keywords:
+  - carotenoid
+  - beta-carotene
+  - provitamin A
+  - yellow pigmentation
+  - orange pigmentation
+  - chromoplast
+  - phytoene synthase
+  - phytoene desaturase
+
+annotation_queries:
+  gene_symbols:
+    - PSY
+    - PDS
+    - ZDS
+    - LCYB
+    - BCH
+  keywords:
+    - carotenoid biosynthesis
+    - phytoene synthase
+    - phytoene desaturase
+    - beta-carotene
+    - lycopene beta-cyclase
+
+context_rules:
+  include_if:
+    phenotype:
+      - yellow pigmentation
+      - orange pigmentation
+      - carotenoid-rich tissue
+      - provitamin A trait
+  caution_if:
+    phenotype:
+      - yellow leaf
+    reason: >
+      Yellow leaves may indicate chlorophyll loss, senescence, nutrient stress, or flavonols rather than carotenoid accumulation.
+
+causal_status: pathway_supported_module
+evidence_level: pathway_supported
+curation_status: seed_recurated_from_legacy_catalog
+
+phenosieve_compatibility:
+  export_ready: draft
+  suggested_output_name: carotenoid_core.phenosieve.yaml
+
+curation:
+  version: 0.1.0
+  curator: Adhityo Wicaksono
+  ai_assisted: true
+  needs_literature_verification: true

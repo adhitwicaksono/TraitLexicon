@@ -1,0 +1,46 @@
+trait_id: TLX-TRAIT-FUNGI-SECMET-0001
+canonical_name: fungal antibiotic and secondary metabolite production
+kingdom_scope: fungi
+trait_category: secondary_metabolites
+
+input_phrases:
+  - antibiotic production
+  - fungal secondary metabolites
+  - anti-cancer compounds
+  - immunosuppressant production
+  - bioactive fungal compounds
+
+recommended_context:
+  taxon:
+    - fungi
+    - filamentous fungi
+  application_context:
+    - pharmaceutical discovery
+    - natural products
+    - antimicrobial compounds
+
+candidate_modules:
+  - module_id: TLX-MODULE-FUNGI-SECMET-0001
+    module_name: pks_nrps_secondary_metabolite_module
+    confidence: high
+    relationship: primary_candidate_module
+    evidence_level: pathway_supported
+
+warnings:
+  - PKS/NRPS presence suggests biosynthetic potential, not confirmed compound production.
+  - Expression, metabolomics, and biosynthetic gene cluster context are needed for stronger claims.
+
+phenosieve_export:
+  recommended_module_file: data/modules/fungi/secondary_metabolites/pks_nrps_secondary_metabolites.yaml
+  phenosieve_export_ready: draft
+
+legacy_seed_source:
+  source_family: early_gsi_trait_catalog
+  source_taxon_group: fungi
+
+curation:
+  status: seed_recurated_from_legacy_catalog
+  version: 0.1.0
+  curator: Adhityo Wicaksono
+  ai_assisted: true
+  needs_literature_verification: true

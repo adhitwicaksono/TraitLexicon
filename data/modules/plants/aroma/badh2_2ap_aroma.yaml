@@ -1,0 +1,80 @@
+module_id: TLX-MODULE-PLANT-AROMA-0001
+module_name: badh2_2ap_aroma_module
+display_name: BADH2 / 2-acetyl-1-pyrroline aroma module
+kingdom_scope: plant
+module_category: aroma_flavor
+
+biological_process:
+  - grain aroma
+  - volatile compound-associated metabolism
+  - 2-acetyl-1-pyrroline-associated aroma biology
+
+core_genes:
+  - symbol: BADH2
+    full_name: betaine aldehyde dehydrogenase 2
+    aliases:
+      - OsBADH2
+      - fgr
+      - fragrance gene
+    expected_role: primary_candidate
+    interpretation: >
+      BADH2 is treated as the central candidate marker for rice-like
+      2-acetyl-1-pyrroline-associated grain aroma.
+
+supporting_genes:
+  - symbol: BADH1
+    expected_role: paralog_context
+    interpretation: >
+      Useful for distinguishing BADH2-like hits from related BADH paralogs.
+
+pathway_keywords:
+  - 2-acetyl-1-pyrroline
+  - aroma
+  - fragrance
+  - aldehyde dehydrogenase
+  - betaine aldehyde dehydrogenase
+  - proline metabolism
+  - polyamine metabolism
+
+annotation_queries:
+  gene_symbols:
+    - BADH2
+    - BADH1
+  keywords:
+    - betaine aldehyde dehydrogenase
+    - aldehyde dehydrogenase
+    - fragrance
+    - 2-acetyl-1-pyrroline
+
+context_rules:
+  include_if:
+    taxon:
+      - Oryza
+      - Poaceae
+    organ:
+      - grain
+      - seed
+  caution_if:
+    taxon:
+      - non-Poaceae
+    reason: >
+      Non-rice aroma traits may be controlled by different volatile biosynthetic pathways.
+
+causal_status: known_major_candidate_in_rice
+evidence_level: causal
+curation_status: seed_recurated_from_legacy_catalog
+
+phenosieve_compatibility:
+  export_ready: draft
+  suggested_output_name: badh2_2ap_aroma.phenosieve.yaml
+  recommended_search_fields:
+    - core_genes
+    - supporting_genes
+    - annotation_queries
+    - pathway_keywords
+
+curation:
+  version: 0.1.0
+  curator: Adhityo Wicaksono
+  ai_assisted: true
+  needs_literature_verification: true

@@ -1,0 +1,47 @@
+trait_id: TLX-TRAIT-ALGAE-BIOENERGY-0001
+canonical_name: algal biofuel production
+kingdom_scope: algae
+trait_category: bioenergy
+
+input_phrases:
+  - algal biofuel
+  - algae bioenergy
+  - lipid-rich algae
+  - algal lipid production
+  - carbohydrate-rich algae
+  - biofuel strain
+
+recommended_context:
+  taxon:
+    - algae
+    - microalgae
+  application_context:
+    - biofuel
+    - bioenergy
+    - renewable energy
+
+candidate_modules:
+  - module_id: TLX-MODULE-ALGAE-BIOENERGY-0001
+    module_name: algal_lipid_carbohydrate_biofuel_module
+    confidence: medium
+    relationship: broad_candidate_module
+    evidence_level: pathway_supported
+
+warnings:
+  - Biofuel phenotype depends strongly on cultivation conditions, growth phase, lipid composition, and biomass yield.
+  - This module is a broad screening module, not a single-gene diagnostic.
+
+phenosieve_export:
+  recommended_module_file: data/modules/algae/bioenergy/algal_lipid_carbohydrate_biofuel.yaml
+  phenosieve_export_ready: draft
+
+legacy_seed_source:
+  source_family: early_gsi_trait_catalog
+  source_taxon_group: algae
+
+curation:
+  status: seed_recurated_from_legacy_catalog
+  version: 0.1.0
+  curator: Adhityo Wicaksono
+  ai_assisted: true
+  needs_literature_verification: true

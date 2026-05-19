@@ -1,0 +1,50 @@
+trait_id: TLX-TRAIT-FUNGI-FERMENT-0001
+canonical_name: fungal fermentation and food production
+kingdom_scope: fungi
+trait_category: fermentation_food
+
+input_phrases:
+  - fungal fermentation
+  - food fermentation
+  - alcohol fermentation
+  - aroma production
+  - texture improvement
+  - yeast fermentation
+
+recommended_context:
+  taxon:
+    - fungi
+    - yeast
+    - filamentous fungi
+  application_context:
+    - bread
+    - beer
+    - cheese
+    - soy fermentation
+    - fermented foods
+
+candidate_modules:
+  - module_id: TLX-MODULE-FUNGI-FERMENT-0001
+    module_name: adh_pdc_alcohol_fermentation_module
+    confidence: high
+    relationship: primary_candidate_module
+    evidence_level: pathway_supported
+
+warnings:
+  - Food fermentation phenotype is strain- and process-dependent.
+  - Aroma and texture traits require metabolomic or fermentation-process validation.
+
+phenosieve_export:
+  recommended_module_file: data/modules/fungi/fermentation/adh_pdc_alcohol_fermentation.yaml
+  phenosieve_export_ready: draft
+
+legacy_seed_source:
+  source_family: early_gsi_trait_catalog
+  source_taxon_group: fungi
+
+curation:
+  status: seed_recurated_from_legacy_catalog
+  version: 0.1.0
+  curator: Adhityo Wicaksono
+  ai_assisted: true
+  needs_literature_verification: true

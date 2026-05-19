@@ -1,0 +1,46 @@
+seed_batch_id: TraitLexicon-v0.1-seed-batch-01
+status: draft
+summary: >
+  First small TraitLexicon YAML seed batch based on re-curated plant,
+  algae, and fungi legacy trait-list materials.
+
+included_trait_entries:
+  plants:
+    - data/traits/plants/aroma/fragrant_rice.yaml
+    - data/traits/plants/stress_tolerance/salt_tolerance.yaml
+    - data/traits/plants/pigmentation/red_purple_pigmentation.yaml
+    - data/traits/plants/pigmentation/yellow_orange_pigmentation.yaml
+  algae:
+    - data/traits/algae/pigments/algal_pigments_colorants.yaml
+    - data/traits/algae/bioenergy/algal_biofuel.yaml
+    - data/traits/algae/remediation/heavy_metal_remediation.yaml
+  fungi:
+    - data/traits/fungi/secondary_metabolites/antibiotic_secondary_metabolites.yaml
+    - data/traits/fungi/enzymes/industrial_enzyme_production.yaml
+    - data/traits/fungi/fermentation/fermentation_food_production.yaml
+
+included_module_definitions:
+  plants:
+    - data/modules/plants/aroma/badh2_2ap_aroma.yaml
+    - data/modules/plants/stress_tolerance/hkt_sos_salt_tolerance.yaml
+    - data/modules/plants/pigmentation/anthocyanin_core.yaml
+    - data/modules/plants/pigmentation/carotenoid_core.yaml
+  algae:
+    - data/modules/algae/pigments/chlorophyll_carotenoid_phycobilin.yaml
+    - data/modules/algae/bioenergy/algal_lipid_carbohydrate_biofuel.yaml
+    - data/modules/algae/remediation/metallothionein_phytochelatin_gst_detox.yaml
+  fungi:
+    - data/modules/fungi/secondary_metabolites/pks_nrps_secondary_metabolites.yaml
+    - data/modules/fungi/enzymes/cellulase_amylase_protease.yaml
+    - data/modules/fungi/fermentation/adh_pdc_alcohol_fermentation.yaml
+
+curation_notes:
+  - These are seed drafts, not final validated modules.
+  - All entries should receive literature-backed references before public release or publication.
+  - Some gene symbols are broad family markers and need lineage-specific refinement.
+  - TraitLexicon does not extract sequences; these modules are intended for later PhenoSieve handoff.
+
+author: Adhityo Wicaksono
+ai_declaration: >
+  Drafted and structured with assistance from OpenAI ChatGPT/Helios. Human expert
+  validation remains required.

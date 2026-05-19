@@ -1,0 +1,93 @@
+module_id: TLX-MODULE-PLANT-PIGMENT-0001
+module_name: anthocyanin_core_module
+display_name: Anthocyanin biosynthesis core module
+kingdom_scope: plant
+module_category: pigmentation
+
+biological_process:
+  - anthocyanin biosynthesis
+  - flavonoid biosynthesis
+  - red-purple-blue pigmentation
+
+core_genes:
+  - symbol: CHS
+    full_name: chalcone synthase
+    expected_role: early_flavonoid_biosynthesis
+  - symbol: CHI
+    full_name: chalcone isomerase
+    expected_role: early_flavonoid_biosynthesis
+  - symbol: DFR
+    full_name: dihydroflavonol 4-reductase
+    expected_role: anthocyanin_biosynthesis
+  - symbol: ANS
+    full_name: anthocyanidin synthase
+    aliases:
+      - LDOX
+    expected_role: anthocyanidin_biosynthesis
+  - symbol: UFGT
+    full_name: UDP-glucose flavonoid glucosyltransferase
+    expected_role: anthocyanin_modification
+
+supporting_genes:
+  - symbol: MYB
+    expected_role: transcriptional_regulation_context
+  - symbol: bHLH
+    expected_role: transcriptional_regulation_context
+  - symbol: WD40
+    expected_role: transcriptional_regulation_context
+
+pathway_keywords:
+  - anthocyanin
+  - flavonoid
+  - red pigmentation
+  - purple pigmentation
+  - blue pigmentation
+  - chalcone synthase
+  - dihydroflavonol reductase
+  - anthocyanidin synthase
+
+annotation_queries:
+  gene_symbols:
+    - CHS
+    - CHI
+    - DFR
+    - ANS
+    - LDOX
+    - UFGT
+  keywords:
+    - anthocyanin biosynthesis
+    - flavonoid biosynthesis
+    - chalcone synthase
+    - anthocyanidin synthase
+    - dihydroflavonol reductase
+
+context_rules:
+  include_if:
+    phenotype:
+      - red pigmentation
+      - purple pigmentation
+      - blue pigmentation
+    tissue:
+      - flower
+      - leaf
+      - stem
+      - fruit skin
+  caution_if:
+    tissue:
+      - fruit flesh
+    reason: >
+      Red or orange fruit flesh may be carotenoid-driven rather than anthocyanin-driven.
+
+causal_status: pathway_supported_module
+evidence_level: pathway_supported
+curation_status: seed_recurated_from_legacy_catalog
+
+phenosieve_compatibility:
+  export_ready: draft
+  suggested_output_name: anthocyanin_core.phenosieve.yaml
+
+curation:
+  version: 0.1.0
+  curator: Adhityo Wicaksono
+  ai_assisted: true
+  needs_literature_verification: true

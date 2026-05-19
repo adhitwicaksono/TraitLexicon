@@ -1,0 +1,78 @@
+module_id: TLX-MODULE-ALGAE-BIOENERGY-0001
+module_name: algal_lipid_carbohydrate_biofuel_module
+display_name: Algal lipid/carbohydrate biofuel module
+kingdom_scope: algae
+module_category: bioenergy
+
+biological_process:
+  - lipid biosynthesis
+  - triacylglycerol biosynthesis
+  - carbohydrate metabolism
+  - bioenergy-associated biomass accumulation
+
+core_genes:
+  - symbol: ACC
+    full_name: acetyl-CoA carboxylase
+    expected_role: fatty_acid_biosynthesis_candidate
+  - symbol: DGAT
+    full_name: diacylglycerol O-acyltransferase
+    expected_role: triacylglycerol_biosynthesis_candidate
+  - symbol: PFK
+    full_name: phosphofructokinase
+    expected_role: carbohydrate_metabolism_context
+
+supporting_genes:
+  - symbol: FAD
+    expected_role: fatty_acid_desaturation_context
+  - symbol: GPAT
+    expected_role: glycerolipid_biosynthesis_context
+
+pathway_keywords:
+  - lipid biosynthesis
+  - fatty acid biosynthesis
+  - triacylglycerol
+  - biofuel
+  - bioenergy
+  - carbohydrate synthesis
+  - acetyl-CoA carboxylase
+  - diacylglycerol acyltransferase
+
+annotation_queries:
+  gene_symbols:
+    - ACC
+    - DGAT
+    - PFK
+    - FAD
+    - GPAT
+  keywords:
+    - acetyl-CoA carboxylase
+    - diacylglycerol O-acyltransferase
+    - fatty acid biosynthesis
+    - lipid accumulation
+    - triacylglycerol biosynthesis
+
+context_rules:
+  include_if:
+    application_context:
+      - biofuel
+      - lipid production
+      - bioenergy
+  caution_if:
+    phenotype_only:
+      - fast growth
+    reason: >
+      Fast growth alone does not indicate high lipid or biofuel potential.
+
+causal_status: broad_pathway_supported_module
+evidence_level: pathway_supported
+curation_status: seed_recurated_from_legacy_catalog
+
+phenosieve_compatibility:
+  export_ready: draft
+  suggested_output_name: algal_lipid_carbohydrate_biofuel.phenosieve.yaml
+
+curation:
+  version: 0.1.0
+  curator: Adhityo Wicaksono
+  ai_assisted: true
+  needs_literature_verification: true

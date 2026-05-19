@@ -1,0 +1,72 @@
+module_id: TLX-MODULE-FUNGI-FERMENT-0001
+module_name: adh_pdc_alcohol_fermentation_module
+display_name: Fungal ADH/PDC alcohol fermentation module
+kingdom_scope: fungi
+module_category: fermentation_food
+
+biological_process:
+  - alcohol fermentation
+  - pyruvate decarboxylation
+  - ethanol production
+  - fermentation-associated aroma production
+
+core_genes:
+  - symbol: ADH1
+    full_name: alcohol dehydrogenase 1
+    expected_role: alcohol_fermentation_candidate
+  - symbol: pdc
+    full_name: pyruvate decarboxylase
+    expected_role: pyruvate_to_acetaldehyde_candidate
+
+supporting_genes:
+  - symbol: ALD
+    expected_role: aldehyde_metabolism_context
+  - symbol: AAT
+    expected_role: ester_aroma_context
+
+pathway_keywords:
+  - alcohol fermentation
+  - ethanol production
+  - pyruvate decarboxylase
+  - alcohol dehydrogenase
+  - ester biosynthesis
+  - fermented food aroma
+
+annotation_queries:
+  gene_symbols:
+    - ADH1
+    - pdc
+    - ALD
+    - AAT
+  keywords:
+    - alcohol dehydrogenase
+    - pyruvate decarboxylase
+    - alcohol fermentation
+    - ethanol production
+    - ester biosynthesis
+
+context_rules:
+  include_if:
+    application_context:
+      - food fermentation
+      - alcohol fermentation
+      - fermented aroma
+  caution_if:
+    phenotype_only:
+      - aroma production
+    reason: >
+      Aroma production may involve many volatile pathways beyond ADH/PDC fermentation.
+
+causal_status: pathway_supported_module
+evidence_level: pathway_supported
+curation_status: seed_recurated_from_legacy_catalog
+
+phenosieve_compatibility:
+  export_ready: draft
+  suggested_output_name: fungal_adh_pdc_fermentation.phenosieve.yaml
+
+curation:
+  version: 0.1.0
+  curator: Adhityo Wicaksono
+  ai_assisted: true
+  needs_literature_verification: true

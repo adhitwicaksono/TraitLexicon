@@ -1,0 +1,82 @@
+module_id: TLX-MODULE-FUNGI-ENZYME-0001
+module_name: cellulase_amylase_protease_industrial_enzyme_module
+display_name: Fungal cellulase/amylase/protease industrial enzyme module
+kingdom_scope: fungi
+module_category: industrial_enzymes
+
+biological_process:
+  - cellulase production
+  - amylase production
+  - protease production
+  - extracellular enzyme secretion
+  - industrial biocatalysis
+
+core_genes:
+  - symbol: celA
+    full_name: cellulase
+    expected_role: cellulose_degradation_candidate
+  - symbol: amyB
+    full_name: amylase
+    expected_role: starch_degradation_candidate
+  - symbol: prtA
+    full_name: protease
+    expected_role: protein_degradation_candidate
+
+supporting_genes:
+  - symbol: xlnR
+    full_name: xylanase regulator
+    expected_role: lignocellulose_degradation_regulation_context
+  - symbol: Lip1
+    full_name: lipase 1
+    expected_role: lipid_hydrolysis_context
+
+pathway_keywords:
+  - cellulase
+  - amylase
+  - protease
+  - xylanase
+  - lipase
+  - extracellular enzyme
+  - industrial biocatalysis
+  - green chemistry
+
+annotation_queries:
+  gene_symbols:
+    - celA
+    - amyB
+    - prtA
+    - xlnR
+    - Lip1
+  keywords:
+    - cellulase
+    - amylase
+    - protease
+    - extracellular enzyme
+    - glycoside hydrolase
+    - industrial enzyme
+
+context_rules:
+  include_if:
+    application_context:
+      - industrial enzyme
+      - biocatalyst
+      - biomass degradation
+  caution_if:
+    result_type:
+      - annotation_keyword_only
+    reason: >
+      Enzyme annotation should be supported by domains, secretion signals, and activity evidence when possible.
+
+causal_status: pathway_supported_module
+evidence_level: pathway_supported
+curation_status: seed_recurated_from_legacy_catalog
+
+phenosieve_compatibility:
+  export_ready: draft
+  suggested_output_name: fungal_industrial_enzymes.phenosieve.yaml
+
+curation:
+  version: 0.1.0
+  curator: Adhityo Wicaksono
+  ai_assisted: true
+  needs_literature_verification: true

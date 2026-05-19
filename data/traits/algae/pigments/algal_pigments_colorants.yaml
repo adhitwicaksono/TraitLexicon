@@ -1,0 +1,50 @@
+trait_id: TLX-TRAIT-ALGAE-PIGMENT-0001
+canonical_name: algal pigments and colorants
+kingdom_scope: algae
+trait_category: pigmentation_colorants
+
+input_phrases:
+  - algal pigments
+  - algae colorants
+  - natural algal colorants
+  - chlorophyll production
+  - carotenoid production
+  - phycobilin production
+  - phycocyanin production
+
+recommended_context:
+  taxon:
+    - algae
+    - microalgae
+    - macroalgae
+  application_context:
+    - food colorant
+    - cosmetic colorant
+    - textile colorant
+    - nutraceutical pigment
+
+candidate_modules:
+  - module_id: TLX-MODULE-ALGAE-PIGMENT-0001
+    module_name: chlorophyll_carotenoid_phycobilin_module
+    confidence: medium
+    relationship: broad_candidate_module
+    evidence_level: pathway_supported
+
+warnings:
+  - Algal pigment classes are taxon-dependent.
+  - Phycobilins are especially relevant to cyanobacteria and red algae-like contexts; carotenoid and chlorophyll modules are broader.
+
+phenosieve_export:
+  recommended_module_file: data/modules/algae/pigments/chlorophyll_carotenoid_phycobilin.yaml
+  phenosieve_export_ready: draft
+
+legacy_seed_source:
+  source_family: early_gsi_trait_catalog
+  source_taxon_group: algae
+
+curation:
+  status: seed_recurated_from_legacy_catalog
+  version: 0.1.0
+  curator: Adhityo Wicaksono
+  ai_assisted: true
+  needs_literature_verification: true

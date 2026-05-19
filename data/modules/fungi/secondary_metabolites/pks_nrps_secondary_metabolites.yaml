@@ -1,0 +1,75 @@
+module_id: TLX-MODULE-FUNGI-SECMET-0001
+module_name: pks_nrps_secondary_metabolite_module
+display_name: Fungal PKS/NRPS secondary metabolite module
+kingdom_scope: fungi
+module_category: secondary_metabolites
+
+biological_process:
+  - secondary metabolism
+  - polyketide biosynthesis
+  - non-ribosomal peptide biosynthesis
+  - natural product biosynthesis
+
+core_genes:
+  - symbol: PKS
+    full_name: polyketide synthase
+    expected_role: polyketide_biosynthesis_candidate
+  - symbol: NRPS
+    full_name: non-ribosomal peptide synthetase
+    expected_role: nonribosomal_peptide_biosynthesis_candidate
+
+supporting_genes:
+  - symbol: DMATS
+    full_name: dimethylallyl tryptophan synthase
+    expected_role: indole_alkaloid_context
+  - symbol: terpene_synthase
+    expected_role: terpene_biosynthesis_context
+  - symbol: tailoring_enzyme
+    expected_role: biosynthetic_gene_cluster_context
+
+pathway_keywords:
+  - secondary metabolism
+  - polyketide synthase
+  - non-ribosomal peptide synthetase
+  - biosynthetic gene cluster
+  - antibiotic
+  - immunosuppressant
+  - natural product
+
+annotation_queries:
+  gene_symbols:
+    - PKS
+    - NRPS
+    - DMATS
+  keywords:
+    - polyketide synthase
+    - non-ribosomal peptide synthetase
+    - secondary metabolite biosynthesis
+    - biosynthetic gene cluster
+    - natural product
+
+context_rules:
+  include_if:
+    application_context:
+      - pharmaceutical discovery
+      - antimicrobial discovery
+      - natural products
+  caution_if:
+    result_type:
+      - gene_presence_only
+    reason: >
+      Gene presence alone does not prove compound production.
+
+causal_status: pathway_supported_module
+evidence_level: pathway_supported
+curation_status: seed_recurated_from_legacy_catalog
+
+phenosieve_compatibility:
+  export_ready: draft
+  suggested_output_name: fungal_pks_nrps_secondary_metabolites.phenosieve.yaml
+
+curation:
+  version: 0.1.0
+  curator: Adhityo Wicaksono
+  ai_assisted: true
+  needs_literature_verification: true

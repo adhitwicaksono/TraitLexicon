@@ -1,0 +1,56 @@
+trait_id: TLX-TRAIT-PLANT-AROMA-0001
+canonical_name: fragrant rice
+kingdom_scope: plant
+trait_category: aroma_flavor
+
+input_phrases:
+  - fragrant rice
+  - aromatic rice
+  - scented rice
+  - rice aroma
+  - pandan aroma
+  - 2-acetyl-1-pyrroline aroma
+
+recommended_context:
+  taxon:
+    - Oryza sativa
+    - Oryza
+    - Poaceae
+  organ:
+    - grain
+    - seed
+  phenotype_context:
+    - aromatic grain
+    - pandan-like aroma
+
+candidate_modules:
+  - module_id: TLX-MODULE-PLANT-AROMA-0001
+    module_name: badh2_2ap_aroma_module
+    confidence: high
+    relationship: primary_candidate_module
+    evidence_level: causal
+    context_note: >
+      Appropriate for rice-like fragrant grain aroma associated with
+      2-acetyl-1-pyrroline biology and BADH2 function.
+
+warnings:
+  - Aroma traits outside rice may involve unrelated volatile pathways.
+  - Use taxon, organ, and compound context before assuming BADH2 involvement.
+
+phenosieve_export:
+  recommended_module_file: data/modules/plants/aroma/badh2_2ap_aroma.yaml
+  phenosieve_export_ready: draft
+
+legacy_seed_source:
+  source_family: early_gsi_trait_catalog
+  source_taxon_group: plant
+  source_note: >
+    Re-curated from legacy plant trait-list material; wording and structure
+    have been rewritten for TraitLexicon.
+
+curation:
+  status: seed_recurated_from_legacy_catalog
+  version: 0.1.0
+  curator: Adhityo Wicaksono
+  ai_assisted: true
+  needs_literature_verification: true

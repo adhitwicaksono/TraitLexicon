@@ -1,0 +1,68 @@
+trait_id: TLX-TRAIT-PLANT-PIGMENT-0001
+canonical_name: red or purple pigmentation
+kingdom_scope: plant
+trait_category: pigmentation
+
+input_phrases:
+  - red color
+  - purple color
+  - red pigmentation
+  - purple pigmentation
+  - red flower
+  - purple flower
+  - red leaf
+  - purple leaf
+  - red fruit skin
+
+recommended_context:
+  taxon:
+    - angiosperms
+    - land plants
+  organ:
+    - flower
+    - fruit
+    - leaf
+    - stem
+  phenotype_context:
+    - red pigmentation
+    - purple pigmentation
+    - blue-purple pigmentation
+
+candidate_modules:
+  - module_id: TLX-MODULE-PLANT-PIGMENT-0001
+    module_name: anthocyanin_core_module
+    confidence: high
+    relationship: primary_candidate_module
+    evidence_level: pathway_supported
+    context_note: >
+      Suitable for many red, purple, or blue pigmentation traits in flowers,
+      leaves, fruit skin, and other anthocyanin-rich tissues.
+
+  - module_id: TLX-MODULE-PLANT-PIGMENT-0002
+    module_name: carotenoid_core_module
+    confidence: context_dependent
+    relationship: alternative_candidate_module
+    evidence_level: pathway_supported
+    context_note: >
+      Consider especially for red/orange fruit flesh or chromoplast-rich tissues.
+
+warnings:
+  - Red color is not automatically anthocyanin. Consider carotenoid, betalain, or chlorophyll-loss contexts.
+  - Betalain should be considered for Caryophyllales-like contexts.
+
+phenosieve_export:
+  recommended_module_files:
+    - data/modules/plants/pigmentation/anthocyanin_core.yaml
+    - data/modules/plants/pigmentation/carotenoid_core.yaml
+  phenosieve_export_ready: draft
+
+legacy_seed_source:
+  source_family: early_gsi_trait_catalog
+  source_taxon_group: plant
+
+curation:
+  status: seed_recurated_from_legacy_catalog
+  version: 0.1.0
+  curator: Adhityo Wicaksono
+  ai_assisted: true
+  needs_literature_verification: true

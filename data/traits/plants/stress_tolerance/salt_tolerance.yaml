@@ -1,0 +1,54 @@
+trait_id: TLX-TRAIT-PLANT-STRESS-0001
+canonical_name: salt tolerance
+kingdom_scope: plant
+trait_category: stress_tolerance
+
+input_phrases:
+  - salt tolerance
+  - salinity tolerance
+  - high salt tolerance
+  - sodium ion tolerance
+  - ionic stress tolerance
+
+recommended_context:
+  taxon:
+    - land plants
+    - crops
+  tissue:
+    - root
+    - shoot
+    - leaf
+  phenotype_context:
+    - survival under salinity
+    - ion homeostasis
+    - sodium exclusion
+    - sodium compartmentalization
+
+candidate_modules:
+  - module_id: TLX-MODULE-PLANT-STRESS-0001
+    module_name: hkt_sos_salt_tolerance_module
+    confidence: high
+    relationship: primary_candidate_module
+    evidence_level: pathway_supported
+    context_note: >
+      Useful as a core plant salinity module focused on sodium transport,
+      sodium exclusion, and SOS pathway ion homeostasis.
+
+warnings:
+  - Salt tolerance is polygenic and context-dependent.
+  - This module should be combined with osmotic stress, ROS detoxification, and tissue-specific expression where possible.
+
+phenosieve_export:
+  recommended_module_file: data/modules/plants/stress_tolerance/hkt_sos_salt_tolerance.yaml
+  phenosieve_export_ready: draft
+
+legacy_seed_source:
+  source_family: early_gsi_trait_catalog
+  source_taxon_group: plant
+
+curation:
+  status: seed_recurated_from_legacy_catalog
+  version: 0.1.0
+  curator: Adhityo Wicaksono
+  ai_assisted: true
+  needs_literature_verification: true

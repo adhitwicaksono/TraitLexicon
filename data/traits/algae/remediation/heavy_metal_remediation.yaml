@@ -1,0 +1,48 @@
+trait_id: TLX-TRAIT-ALGAE-REMEDIATION-0001
+canonical_name: heavy metal remediation
+kingdom_scope: algae
+trait_category: environmental_remediation
+
+input_phrases:
+  - heavy metal remediation
+  - metal tolerance
+  - metal absorption
+  - pollutant removal
+  - wastewater remediation
+  - algae bioremediation
+
+recommended_context:
+  taxon:
+    - algae
+    - microalgae
+    - macroalgae
+  application_context:
+    - wastewater treatment
+    - heavy metal removal
+    - environmental clean-up
+
+candidate_modules:
+  - module_id: TLX-MODULE-ALGAE-REMEDIATION-0001
+    module_name: metallothionein_phytochelatin_gst_detox_module
+    confidence: medium
+    relationship: primary_candidate_module
+    evidence_level: pathway_supported
+
+warnings:
+  - Metal remediation capacity is strongly affected by cell wall chemistry, extracellular binding, growth conditions, and metal species.
+  - Genomic markers should be interpreted alongside physiological assays.
+
+phenosieve_export:
+  recommended_module_file: data/modules/algae/remediation/metallothionein_phytochelatin_gst_detox.yaml
+  phenosieve_export_ready: draft
+
+legacy_seed_source:
+  source_family: early_gsi_trait_catalog
+  source_taxon_group: algae
+
+curation:
+  status: seed_recurated_from_legacy_catalog
+  version: 0.1.0
+  curator: Adhityo Wicaksono
+  ai_assisted: true
+  needs_literature_verification: true

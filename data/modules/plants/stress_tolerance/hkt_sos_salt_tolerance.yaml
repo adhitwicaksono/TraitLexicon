@@ -1,0 +1,87 @@
+module_id: TLX-MODULE-PLANT-STRESS-0001
+module_name: hkt_sos_salt_tolerance_module
+display_name: HKT/SOS sodium homeostasis salt tolerance module
+kingdom_scope: plant
+module_category: stress_tolerance
+
+biological_process:
+  - salt tolerance
+  - sodium ion transport
+  - ion homeostasis
+  - salinity stress response
+
+core_genes:
+  - symbol: HKT1
+    full_name: high-affinity potassium transporter 1
+    aliases:
+      - HKT
+    expected_role: sodium_transport_candidate
+  - symbol: SOS1
+    full_name: salt overly sensitive 1
+    aliases:
+      - NHX7
+    expected_role: sodium_efflux_candidate
+  - symbol: SOS2
+    full_name: salt overly sensitive 2
+    expected_role: signaling_candidate
+  - symbol: SOS3
+    full_name: salt overly sensitive 3
+    expected_role: calcium_sensor_candidate
+
+supporting_genes:
+  - symbol: NHX
+    expected_role: vacuolar_sodium_compartmentalization_candidate
+  - symbol: CBL
+    expected_role: calcium_signaling_context
+  - symbol: CIPK
+    expected_role: kinase_signaling_context
+
+pathway_keywords:
+  - salinity tolerance
+  - salt stress
+  - sodium transport
+  - sodium exclusion
+  - ion homeostasis
+  - SOS pathway
+  - HKT transporter
+
+annotation_queries:
+  gene_symbols:
+    - HKT1
+    - SOS1
+    - SOS2
+    - SOS3
+    - NHX
+    - CBL
+    - CIPK
+  keywords:
+    - sodium transporter
+    - salt overly sensitive
+    - high-affinity potassium transporter
+    - salinity stress
+    - ion homeostasis
+
+context_rules:
+  include_if:
+    stress:
+      - salinity
+      - sodium stress
+  caution_if:
+    phenotype_only:
+      - drought tolerance
+    reason: >
+      Drought and salt stress overlap but should not be collapsed without evidence.
+
+causal_status: pathway_supported_module
+evidence_level: pathway_supported
+curation_status: seed_recurated_from_legacy_catalog
+
+phenosieve_compatibility:
+  export_ready: draft
+  suggested_output_name: hkt_sos_salt_tolerance.phenosieve.yaml
+
+curation:
+  version: 0.1.0
+  curator: Adhityo Wicaksono
+  ai_assisted: true
+  needs_literature_verification: true

@@ -1,0 +1,77 @@
+module_id: TLX-MODULE-ALGAE-REMEDIATION-0001
+module_name: metallothionein_phytochelatin_gst_detox_module
+display_name: Algal metallothionein/phytochelatin/GST detoxification module
+kingdom_scope: algae
+module_category: environmental_remediation
+
+biological_process:
+  - heavy metal tolerance
+  - metal sequestration
+  - detoxification
+  - pollutant response
+
+core_genes:
+  - symbol: MT
+    full_name: metallothionein
+    expected_role: metal_binding_candidate
+  - symbol: PCS
+    full_name: phytochelatin synthase
+    expected_role: metal_chelation_candidate
+  - symbol: GST
+    full_name: glutathione S-transferase
+    expected_role: detoxification_candidate
+
+supporting_genes:
+  - symbol: ABC
+    expected_role: transporter_context
+  - symbol: HMA
+    expected_role: metal_transport_context
+
+pathway_keywords:
+  - metallothionein
+  - phytochelatin
+  - glutathione S-transferase
+  - heavy metal tolerance
+  - metal sequestration
+  - detoxification
+  - wastewater remediation
+
+annotation_queries:
+  gene_symbols:
+    - MT
+    - PCS
+    - GST
+    - ABC
+    - HMA
+  keywords:
+    - metallothionein
+    - phytochelatin synthase
+    - glutathione S-transferase
+    - heavy metal tolerance
+    - detoxification
+
+context_rules:
+  include_if:
+    application_context:
+      - bioremediation
+      - wastewater treatment
+      - metal removal
+  caution_if:
+    phenotype_only:
+      - pollutant removal
+    reason: >
+      Pollutant removal can involve biosorption, metabolism, extracellular binding, or community-level effects.
+
+causal_status: broad_pathway_supported_module
+evidence_level: pathway_supported
+curation_status: seed_recurated_from_legacy_catalog
+
+phenosieve_compatibility:
+  export_ready: draft
+  suggested_output_name: algal_metal_detox.phenosieve.yaml
+
+curation:
+  version: 0.1.0
+  curator: Adhityo Wicaksono
+  ai_assisted: true
+  needs_literature_verification: true

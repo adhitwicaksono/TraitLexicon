@@ -1,0 +1,49 @@
+trait_id: TLX-TRAIT-FUNGI-ENZYME-0001
+canonical_name: fungal industrial enzyme production
+kingdom_scope: fungi
+trait_category: industrial_enzymes
+
+input_phrases:
+  - fungal enzyme production
+  - industrial enzyme production
+  - cellulase production
+  - amylase production
+  - protease production
+  - fungal biocatalyst
+
+recommended_context:
+  taxon:
+    - fungi
+    - filamentous fungi
+    - yeast
+  application_context:
+    - food industry
+    - textile industry
+    - paper industry
+    - detergent industry
+    - green chemistry
+
+candidate_modules:
+  - module_id: TLX-MODULE-FUNGI-ENZYME-0001
+    module_name: cellulase_amylase_protease_industrial_enzyme_module
+    confidence: high
+    relationship: primary_candidate_module
+    evidence_level: pathway_supported
+
+warnings:
+  - Enzyme genes should be interpreted together with secretion signals, expression, copy number, and cultivation conditions.
+
+phenosieve_export:
+  recommended_module_file: data/modules/fungi/enzymes/cellulase_amylase_protease.yaml
+  phenosieve_export_ready: draft
+
+legacy_seed_source:
+  source_family: early_gsi_trait_catalog
+  source_taxon_group: fungi
+
+curation:
+  status: seed_recurated_from_legacy_catalog
+  version: 0.1.0
+  curator: Adhityo Wicaksono
+  ai_assisted: true
+  needs_literature_verification: true

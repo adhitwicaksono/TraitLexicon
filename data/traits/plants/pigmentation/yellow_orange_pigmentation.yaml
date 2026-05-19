@@ -1,0 +1,54 @@
+trait_id: TLX-TRAIT-PLANT-PIGMENT-0002
+canonical_name: yellow or orange pigmentation
+kingdom_scope: plant
+trait_category: pigmentation
+
+input_phrases:
+  - yellow color
+  - orange color
+  - yellow pigmentation
+  - orange pigmentation
+  - yellow fruit
+  - orange fruit
+  - yellow flower
+  - yellow leaf
+
+recommended_context:
+  taxon:
+    - land plants
+    - crops
+  organ:
+    - flower
+    - fruit
+    - leaf
+    - seed
+  phenotype_context:
+    - yellow-orange pigmentation
+    - provitamin A trait
+    - carotenoid-rich tissue
+
+candidate_modules:
+  - module_id: TLX-MODULE-PLANT-PIGMENT-0002
+    module_name: carotenoid_core_module
+    confidence: high
+    relationship: primary_candidate_module
+    evidence_level: pathway_supported
+
+warnings:
+  - Yellow color may also reflect flavonols, chlorophyll loss, senescence, or stress response.
+  - Use tissue and developmental context before assigning a carotenoid-only interpretation.
+
+phenosieve_export:
+  recommended_module_file: data/modules/plants/pigmentation/carotenoid_core.yaml
+  phenosieve_export_ready: draft
+
+legacy_seed_source:
+  source_family: early_gsi_trait_catalog
+  source_taxon_group: plant
+
+curation:
+  status: seed_recurated_from_legacy_catalog
+  version: 0.1.0
+  curator: Adhityo Wicaksono
+  ai_assisted: true
+  needs_literature_verification: true

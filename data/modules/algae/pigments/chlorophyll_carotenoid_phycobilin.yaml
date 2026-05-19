@@ -1,0 +1,75 @@
+module_id: TLX-MODULE-ALGAE-PIGMENT-0001
+module_name: chlorophyll_carotenoid_phycobilin_module
+display_name: Algal chlorophyll/carotenoid/phycobilin pigment module
+kingdom_scope: algae
+module_category: pigmentation_colorants
+
+biological_process:
+  - chlorophyll metabolism
+  - carotenoid biosynthesis
+  - phycobilin-associated pigmentation
+  - algal pigment production
+
+core_genes:
+  - symbol: CHL1
+    full_name: chlorophyllase 1
+    expected_role: chlorophyll_metabolism_candidate
+  - symbol: PSY
+    full_name: phytoene synthase
+    expected_role: carotenoid_biosynthesis_candidate
+  - symbol: CPC
+    full_name: C-phycocyanin-associated gene marker
+    expected_role: phycobiliprotein_context_candidate
+
+supporting_genes:
+  - symbol: PDS
+    expected_role: carotenoid_biosynthesis_context
+  - symbol: PBS
+    expected_role: phycobilisome_context
+
+pathway_keywords:
+  - chlorophyll
+  - carotenoid
+  - phycobilin
+  - phycocyanin
+  - natural colorant
+  - algal pigment
+
+annotation_queries:
+  gene_symbols:
+    - CHL1
+    - PSY
+    - CPC
+    - PDS
+  keywords:
+    - chlorophyllase
+    - phytoene synthase
+    - phycocyanin
+    - phycobiliprotein
+    - carotenoid biosynthesis
+
+context_rules:
+  include_if:
+    application_context:
+      - colorant
+      - pigment production
+      - nutraceutical pigment
+  caution_if:
+    taxon:
+      - non-photosynthetic organisms
+    reason: >
+      Pigment module interpretation requires photosynthetic or pigment-producing lineage context.
+
+causal_status: broad_pathway_supported_module
+evidence_level: pathway_supported
+curation_status: seed_recurated_from_legacy_catalog
+
+phenosieve_compatibility:
+  export_ready: draft
+  suggested_output_name: algal_pigment_core.phenosieve.yaml
+
+curation:
+  version: 0.1.0
+  curator: Adhityo Wicaksono
+  ai_assisted: true
+  needs_literature_verification: true
