@@ -1,29 +1,31 @@
 # TraitLexicon
 
-**TraitLexicon** is a curated plant trait dictionary that translates human-readable plant trait phrases into standardized candidate gene and pathway module definitions.
+**TraitLexicon** is a curated, context-aware trait-to-module dictionary that translates human-readable biological trait phrases into standardized candidate gene/pathway modules.
 
-It is designed as an upstream companion to **PhenoSieve**.
+It is designed as the **upstream interpretation layer** for **PhenoSieve**.
 
-Where **PhenoSieve** extracts sequences and generates BUSCO-like module statistics, **TraitLexicon** defines what the trait-associated module should be.
+Where **PhenoSieve** extracts sequences, orthogroups, and module statistics from genomic or transcriptomic resources, **TraitLexicon** defines **what a trait phrase should biologically mean**.
 
 ---
 
-## Concept
+## Core idea
 
-Many biological questions begin as human-readable trait phrases:
+Many biological questions begin as natural-language trait phrases such as:
 
 - "fragrant rice"
 - "red color"
 - "yellow color"
 - "drought tolerance"
+- "wood density"
+- "heavy metal remediation"
+- "antibiotic production"
 - "Rafflesia warts"
-- "large flower"
-- "thickened cell wall"
-- "purple leaf"
 
-However, these phrases are not directly usable by bioinformatics pipelines.
+These phrases are meaningful to humans, but they are not directly usable by downstream bioinformatics tools.
 
-TraitLexicon converts these phrases into curated, structured, context-aware module definitions.
+**TraitLexicon** bridges that gap by converting trait phrases into curated, evidence-graded, context-aware module definitions.
+
+Example:
 
 ```text
 "fragrant rice"
@@ -37,97 +39,111 @@ PhenoSieve
 Sequence extraction, orthogroup checking, and module statistics
 ```
 
-TraitLexicon does **not** extract sequences directly.
+TraitLexicon itself does **not** extract sequences.
 
-Instead, it outputs module definitions that can later be used by downstream tools such as PhenoSieve.
+Instead, it outputs structured module definitions that downstream tools can consume.
+
+---
+
+## Scope
+
+TraitLexicon is intentionally broader than the original plant-only concept.
+
+### Current intended scope
+- **Plants**
+- **Algae**
+- **Fungi**
+
+This cross-kingdom scope is motivated by legacy draft trait catalogs covering plant, algae, and fungi genomics, which can now be re-curated into a structured public framework.
+
+### Initial emphasis
+TraitLexicon will still begin with a stronger seed focus on **plant biology**, then expand to algae and fungi in staged releases.
 
 ---
 
 ## TraitLexicon vs PhenoSieve
 
-| Project | Purpose | Input | Output |
+| Project | Role | Input | Output |
 |---|---|---|---|
-| **TraitLexicon** | Trait phrase to module definition | Human-readable trait phrase | Curated gene/pathway module |
-| **PhenoSieve** | Module-guided sequence extraction | Module definition, annotation, orthogroups, FASTA | Extracted sequences and module statistics |
+| **TraitLexicon** | Trait interpretation | Human-readable trait phrase | Curated candidate module definition |
+| **PhenoSieve** | Sequence extraction and module calling | Module definition + annotation + orthogroups + FASTA | Extracted sequences and module-level statistics |
 
 TraitLexicon answers:
 
-> What biological module should this trait phrase point to?
+> “What biological module should this trait phrase point to?”
 
 PhenoSieve answers:
 
-> Can I find and extract the genes or sequences belonging to this module?
-
----
-
-## Relationship to Pheno2Geno
-
-**Pheno2Geno** is reserved as a possible future umbrella name for a broader ecosystem connecting trait phrases, curated gene/pathway modules, sequence extraction, and candidate gene prioritization.
-
-In that future ecosystem:
-
-```text
-Pheno2Geno
-├── TraitLexicon     # trait phrase → standardized module definition
-├── PhenoSieve       # module definition → sequence extraction + statistics
-├── TraitRanker      # optional future candidate prioritization
-└── TraitViewer      # optional visualization/report layer
-```
-
-TraitLexicon remains focused on trait-to-module translation.
-
----
-
-## Example mappings
-
-| Human-readable trait phrase | TraitLexicon output |
-|---|---|
-| fragrant rice | BADH2 / aroma / 2-acetyl-1-pyrroline-associated module |
-| red color | Anthocyanin, carotenoid, betalain, or chlorophyll-loss modules depending on context |
-| yellow color | Carotenoid, flavonol, or chlorophyll-loss modules depending on context |
-| Rafflesia warts | Epidermal patterning, floral surface development, cuticle, and cell wall remodeling modules |
+> “Can I detect and extract sequences belonging to this curated module?”
 
 ---
 
 ## Why context matters
 
-A phrase such as **"red color"** is biologically ambiguous.
+A trait phrase does not always map to a single pathway or gene.
 
-Depending on the organism, tissue, and developmental stage, red pigmentation may involve:
+For example:
 
-- anthocyanins
-- carotenoids
-- betalains
-- chlorophyll degradation or pigment unmasking
-- stress-associated pigmentation
+- **"red color"** may involve anthocyanins, carotenoids, betalains, or chlorophyll-loss context
+- **"yellow color"** may involve carotenoids, flavonols, senescence, or chlorophyll degradation
+- **"fragrant"** in rice is not the same as floral volatile aroma in ornamental plants
+- **"Rafflesia warts"** is best treated as an exploratory morphology-driven module rather than a single known causal gene
 
-TraitLexicon therefore stores context-aware candidate modules instead of forcing a single trait-to-gene answer.
+TraitLexicon is therefore designed to support:
 
-This is especially important for plant biology, where similar phenotypes can arise from different molecular mechanisms depending on taxon, organ, tissue type, developmental stage, and ecological context.
+- **context-aware mapping**
+- **multiple candidate modules**
+- **evidence grading**
+- **downstream export compatibility**
 
 ---
 
-## Design philosophy
+## Example mappings
 
-TraitLexicon is not a simple one-trait-one-gene lookup table.
+| Trait phrase | Candidate module output |
+|---|---|
+| fragrant rice | BADH2 / 2-acetyl-1-pyrroline aroma module |
+| red color | Anthocyanin, carotenoid, betalain, or chlorophyll-loss context modules |
+| yellow color | Carotenoid, flavonol, or chlorophyll-loss modules |
+| salt tolerance | Ion homeostasis / HKT-SOS module |
+| heavy metal remediation | Metallothionein / phytochelatin / detoxification module |
+| antibiotic production | Secondary metabolite / PKS-NRPS module |
+| Rafflesia warts | Epidermal patterning / floral surface / cuticle / cell wall remodeling modules |
 
-It is designed around:
+---
 
-- trait phrase interpretation
-- biological context
-- curated candidate modules
-- evidence-aware annotation
-- downstream compatibility with PhenoSieve
-- transparent uncertainty for exploratory traits
+## Cross-kingdom seed direction
 
-The project is especially useful for:
+### Plants
+Examples of strong seed topics:
+- flowering time
+- drought tolerance
+- salt tolerance
+- anthocyanin pigmentation
+- carotenoid pigmentation
+- BADH2-associated aroma
+- lignin/wood density
+- cuticle thickness
+- root architecture
+- plant-microbe interactions
 
-- plant comparative genomics
-- non-model plant systems
-- candidate gene discovery
-- pathway-guided sequence extraction
-- trait-oriented omics exploration
-- hypothesis generation in unusual plant lineages
+### Algae
+Examples of strong seed topics:
+- pigment/colorant production
+- lipid biosynthesis for biofuel
+- carbon fixation and sequestration
+- heavy metal remediation
+- bioactive compounds
+- nutraceutical traits
+
+### Fungi
+Examples of strong seed topics:
+- secondary metabolite production
+- PKS/NRPS modules
+- enzyme production
+- fermentation traits
+- biocontrol and mycoparasitism
+- remediation and biodegradation
 
 ---
 
@@ -139,51 +155,20 @@ TraitLexicon/
 ├── LICENSE
 ├── CITATION.cff
 ├── pyproject.toml
-├── traitlexicon/
-│   ├── __init__.py
-│   ├── cli.py
-│   ├── resolver.py
-│   ├── validator.py
-│   └── export.py
 │
 ├── data/
 │   ├── traits/
-│   │   ├── aroma/
-│   │   │   └── fragrant_rice.yaml
-│   │   ├── pigmentation/
-│   │   │   ├── red_color.yaml
-│   │   │   └── yellow_color.yaml
-│   │   └── morphology/
-│   │       └── rafflesia_warts.yaml
+│   │   ├── plants/
+│   │   ├── algae/
+│   │   └── fungi/
 │   │
 │   ├── modules/
-│   │   ├── aroma/
-│   │   │   └── badh2_2ap_aroma.yaml
-│   │   ├── pigmentation/
-│   │   │   ├── anthocyanin_core.yaml
-│   │   │   ├── carotenoid_core.yaml
-│   │   │   ├── betalain_core.yaml
-│   │   │   ├── flavonol_yellow.yaml
-│   │   │   └── chlorophyll_loss.yaml
-│   │   └── morphology/
-│   │       ├── epidermal_patterning.yaml
-│   │       ├── floral_surface_development.yaml
-│   │       ├── cuticle_development.yaml
-│   │       └── cell_wall_remodeling.yaml
+│   │   ├── plants/
+│   │   ├── algae/
+│   │   └── fungi/
 │   │
 │   ├── vocab/
-│   │   ├── trait_synonyms.yaml
-│   │   ├── gene_aliases.yaml
-│   │   ├── pathway_aliases.yaml
-│   │   ├── tissue_terms.yaml
-│   │   └── context_rules.yaml
-│   │
 │   └── ontology_maps/
-│       ├── plant_trait_ontology.yaml
-│       ├── plant_ontology.yaml
-│       ├── go_terms.yaml
-│       ├── kegg_terms.yaml
-│       └── mapman_terms.yaml
 │
 ├── schema/
 │   ├── trait_entry.schema.json
@@ -191,77 +176,32 @@ TraitLexicon/
 │   └── phenosieve_export.schema.json
 │
 ├── examples/
-│   ├── query_fragrant_rice.yaml
-│   ├── query_red_flower.yaml
-│   ├── query_yellow_leaf.yaml
-│   ├── query_rafflesia_warts.yaml
-│   └── phenosieve_export_example.yaml
-│
 ├── docs/
-│   ├── concept.md
-│   ├── curation_guidelines.md
-│   ├── module_format.md
-│   ├── context_aware_traits.md
-│   ├── evidence_levels.md
-│   └── traitlexicon_vs_phenosieve.md
-│
+├── traitlexicon/
 └── tests/
-    ├── test_schema_validation.py
-    ├── test_trait_resolution.py
-    └── test_phenosieve_export.py
-```
-
-For the earliest version, the Python package is optional. The main scientific asset of v0.1 is the curated dictionary and module format.
-
----
-
-## Minimal v0.1 repository layout
-
-```text
-TraitLexicon/
-├── README.md
-├── data/
-│   ├── traits/
-│   │   ├── aroma/fragrant_rice.yaml
-│   │   ├── pigmentation/red_color.yaml
-│   │   ├── pigmentation/yellow_color.yaml
-│   │   └── morphology/rafflesia_warts.yaml
-│   └── modules/
-│       ├── aroma/badh2_2ap_aroma.yaml
-│       ├── pigmentation/anthocyanin_core.yaml
-│       ├── pigmentation/carotenoid_core.yaml
-│       ├── pigmentation/betalain_core.yaml
-│       ├── pigmentation/chlorophyll_loss.yaml
-│       └── morphology/cell_wall_remodeling.yaml
-├── docs/
-│   ├── curation_guidelines.md
-│   └── evidence_levels.md
-└── examples/
-    └── phenosieve_export_example.yaml
 ```
 
 ---
 
-## Trait entry format
+## Core data model
 
-Trait entries describe how human-readable trait phrases map to one or more candidate modules.
+TraitLexicon uses two main conceptual file types:
+
+### 1. Trait entry
+A trait entry describes how a natural-language trait phrase maps to one or more candidate modules.
 
 Example:
 
 ```yaml
-trait_id: TLX-TRAIT-AROMA-0001
+trait_id: TLX-TRAIT-PLANT-AROMA-0001
 canonical_name: fragrant rice
 trait_category: aroma
-
-description: >
-  Grain aroma phenotype commonly associated with accumulation of
-  2-acetyl-1-pyrroline in aromatic rice varieties.
+kingdom_scope: plant
 
 input_phrases:
   - fragrant rice
   - aromatic rice
   - rice aroma
-  - pandan-like rice smell
   - scented rice
 
 recommended_context:
@@ -270,55 +210,33 @@ recommended_context:
   organ:
     - grain
     - seed
-  developmental_stage:
-    - mature grain
 
 candidate_modules:
-  - module_id: TLX-MODULE-AROMA-0001
+  - module_id: TLX-MODULE-PLANT-AROMA-0001
     module_name: badh2_2ap_aroma_module
     confidence: high
     relationship: primary_candidate_module
-    context_note: >
-      Most appropriate for rice grain aroma associated with
-      2-acetyl-1-pyrroline accumulation.
-
-warnings:
-  - This module is trait-associated and context-dependent.
-  - Aroma phenotypes in non-rice plants may involve different volatile pathways.
 
 phenosieve_export:
-  recommended_module_file: data/modules/aroma/badh2_2ap_aroma.yaml
+  recommended_module_file: data/modules/plants/aroma/badh2_2ap_aroma.yaml
 
 curation:
   status: seed
   version: 0.1.0
-  curator: Adhityo Wicaksono
-  last_updated: 2026-05-19
 ```
 
----
-
-## Module definition format
-
-Module definitions describe candidate genes, aliases, pathways, annotation keywords, context rules, and PhenoSieve export fields.
+### 2. Module definition
+A module definition describes the biological components of a candidate module.
 
 Example:
 
 ```yaml
-module_id: TLX-MODULE-AROMA-0001
+module_id: TLX-MODULE-PLANT-AROMA-0001
 module_name: badh2_2ap_aroma_module
 display_name: BADH2 / 2-acetyl-1-pyrroline aroma module
 
 module_category: aroma
-
-biological_process:
-  - grain aroma
-  - volatile compound metabolism
-  - 2-acetyl-1-pyrroline-associated metabolism
-
-description: >
-  Candidate module for fragrant rice aroma, centered on BADH2 and
-  2-acetyl-1-pyrroline-associated aroma biology.
+kingdom_scope: plant
 
 core_genes:
   - symbol: BADH2
@@ -328,25 +246,16 @@ core_genes:
       - fgr
       - fragrance gene
     expected_role: primary_candidate
-    interpretation: >
-      Loss or reduction of BADH2 function is commonly associated with
-      aromatic rice phenotypes.
 
 supporting_genes:
   - symbol: BADH1
-    full_name: betaine aldehyde dehydrogenase 1
     expected_role: paralog_context
-    interpretation: >
-      Useful for paralog comparison and distinguishing BADH2-like hits.
 
 pathway_keywords:
   - 2-acetyl-1-pyrroline
   - aroma
   - fragrance
   - aldehyde dehydrogenase
-  - betaine aldehyde dehydrogenase
-  - proline metabolism
-  - polyamine metabolism
 
 annotation_queries:
   gene_symbols:
@@ -354,18 +263,8 @@ annotation_queries:
     - BADH1
   keywords:
     - betaine aldehyde dehydrogenase
-    - aldehyde dehydrogenase
-    - fragrance
     - 2-acetyl-1-pyrroline
-  domains:
-    - aldehyde dehydrogenase domain
-
-orthology:
-  preferred_reference_taxa:
-    - Oryza sativa
-  expected_copy_behavior: >
-    BADH-like genes may occur as paralogs; BADH2-specific resolution
-    should use orthology, synteny, or reciprocal similarity when possible.
+    - fragrance
 
 context_rules:
   include_if:
@@ -375,382 +274,179 @@ context_rules:
     organ:
       - grain
       - seed
-  caution_if:
-    taxon:
-      - non-Poaceae
-    reason: >
-      Aroma traits outside rice may involve unrelated volatile pathways.
 
-evidence_level: high
 causal_status: known_major_candidate_in_rice
-curation_status: seed
+evidence_level: causal
 
 phenosieve_compatibility:
   export_ready: true
-  required_fields:
-    - core_genes
-    - annotation_queries
-    - pathway_keywords
   suggested_output_name: badh2_2ap_aroma.phenosieve.yaml
-
-curation:
-  version: 0.1.0
-  curator: Adhityo Wicaksono
-  last_updated: 2026-05-19
-```
-
----
-
-## Context-aware example: red color
-
-The phrase **"red color"** should not be mapped automatically to one pathway.
-
-Example trait entry logic:
-
-```yaml
-trait_id: TLX-TRAIT-PIGMENT-0001
-canonical_name: red color
-trait_category: pigmentation
-
-input_phrases:
-  - red color
-  - red pigmentation
-  - red flower
-  - red fruit
-  - red leaf
-  - red stem
-  - red pericarp
-
-candidate_modules:
-  - module_id: TLX-MODULE-PIGMENT-ANTHOCYANIN-0001
-    module_name: anthocyanin_core_module
-    confidence: high
-    use_when:
-      tissue:
-        - flower
-        - leaf
-        - stem
-        - fruit skin
-      taxon_context: most angiosperms
-    note: >
-      Common module for red, purple, or blue pigmentation in many plant tissues.
-
-  - module_id: TLX-MODULE-PIGMENT-CAROTENOID-0001
-    module_name: carotenoid_core_module
-    confidence: medium
-    use_when:
-      tissue:
-        - fruit flesh
-        - chromoplast-rich tissue
-      examples:
-        - tomato-like red fruit
-        - pepper-like red fruit
-
-  - module_id: TLX-MODULE-PIGMENT-BETALAIN-0001
-    module_name: betalain_core_module
-    confidence: high
-    use_when:
-      taxon_context:
-        - Caryophyllales
-      examples:
-        - beetroot-like red pigmentation
-
-  - module_id: TLX-MODULE-PIGMENT-CHLOROPHYLL-LOSS-0001
-    module_name: chlorophyll_loss_unmasking_module
-    confidence: low_to_medium
-    use_when:
-      phenotype:
-        - red/yellow unmasking due to chlorophyll degradation
-      tissue:
-        - senescent leaf
-        - ripening fruit
-
-warnings:
-  - Red pigmentation is context-dependent.
-  - Tissue, taxon, developmental stage, and compound class should be specified when possible.
-```
-
----
-
-## Exploratory example: Rafflesia warts
-
-Some traits are not known causal gene modules. TraitLexicon should represent these honestly as exploratory or hypothesis-generating modules.
-
-Example:
-
-```yaml
-trait_id: TLX-TRAIT-MORPH-RAFFLESIA-0001
-canonical_name: Rafflesia warts
-trait_category: floral_surface_morphology
-
-input_phrases:
-  - Rafflesia warts
-  - perigone warts
-  - floral warts
-  - Rafflesia perigone surface
-  - Rafflesia wart patterning
-  - Rafflesia floral surface structures
-
-recommended_context:
-  taxon:
-    - Rafflesia
-    - Rafflesiaceae
-  organ:
-    - perigone lobe
-    - floral surface
-  tissue:
-    - epidermis
-    - subepidermal tissue
-
-candidate_modules:
-  - module_id: TLX-MODULE-MORPH-EPIDERMAL-PATTERNING-0001
-    module_name: epidermal_patterning_module
-    confidence: exploratory
-    relationship: candidate_developmental_module
-
-  - module_id: TLX-MODULE-MORPH-FLORAL-SURFACE-0001
-    module_name: floral_surface_development_module
-    confidence: exploratory
-    relationship: candidate_developmental_module
-
-  - module_id: TLX-MODULE-MORPH-CUTICLE-0001
-    module_name: cuticle_development_module
-    confidence: exploratory
-    relationship: candidate_surface_module
-
-  - module_id: TLX-MODULE-MORPH-CELL-WALL-REMODELING-0001
-    module_name: cell_wall_remodeling_module
-    confidence: exploratory
-    relationship: candidate_structural_module
-
-warnings:
-  - This is a hypothesis-generating module, not a validated causal module.
-  - Rafflesia warts may involve species-specific floral morphology, epidermal patterning, cell expansion, cuticle formation, and host-influenced developmental context.
-  - Spatial transcriptomics or tissue-specific expression would greatly improve interpretation.
-
-phenosieve_export:
-  recommended_combined_module:
-    - epidermal_patterning_module
-    - floral_surface_development_module
-    - cuticle_development_module
-    - cell_wall_remodeling_module
-
-curation:
-  status: exploratory_seed
-  version: 0.1.0
-  curator: Adhityo Wicaksono
-  last_updated: 2026-05-19
 ```
 
 ---
 
 ## Evidence levels
 
-TraitLexicon modules should declare their evidence level.
+TraitLexicon entries should carry explicit evidence levels.
+
+Suggested controlled vocabulary:
 
 | Evidence level | Meaning |
 |---|---|
-| causal | Direct functional evidence exists |
-| strong_association | Strong genetic or phenotypic association |
-| pathway_supported | Pathway is known to produce related phenotype |
-| orthology_inferred | Candidate inferred from homologs or orthologs |
-| expression_supported | Candidate supported by expression data |
-| morphology_inferred | Candidate inferred from developmental or morphological analogy |
-| exploratory | Hypothesis-generating only |
+| **causal** | Direct functional evidence exists |
+| **strong_association** | Strong genetic or phenotype association |
+| **pathway_supported** | Pathway is clearly associated with the phenotype |
+| **orthology_inferred** | Candidate inferred from homologs or orthologs |
+| **expression_supported** | Candidate supported by transcriptomic evidence |
+| **morphology_inferred** | Candidate inferred from developmental or morphological analogy |
+| **exploratory** | Hypothesis-generating only |
 
-This is especially important for non-model organisms and unusual traits.
-
----
-
-## Mapping confidence classes
-
-TraitLexicon mappings may be classified as:
-
-| Class | Meaning |
-|---|---|
-| precise | Trait phrase points to a relatively specific candidate gene/module |
-| context-dependent | Multiple modules are plausible depending on biological context |
-| broad pathway | Trait phrase maps to a general pathway rather than a single candidate |
-| hypothesis-generating | Trait phrase can guide candidate module construction but lacks direct validation |
-| exploratory | Useful for structured exploration, but evidence remains limited |
-
-Examples:
-
-| Trait phrase | Suggested mapping class |
-|---|---|
-| fragrant rice | precise |
-| red color | context-dependent |
-| yellow color | context-dependent |
-| Rafflesia warts | hypothesis-generating / exploratory |
+This prevents overclaiming and is especially important for unusual or non-model traits.
 
 ---
 
-## Planned seed modules
+## Legacy seed materials
 
-### Aroma
+TraitLexicon will reuse earlier AI-assisted trait-list documents as **legacy seed material**, especially for the first-pass coverage of plants, algae, and fungi.
 
+However, these legacy materials should **not** be copied verbatim into the public repository.
+
+Instead, they should be:
+
+1. re-curated
+2. rewritten in standardized TraitLexicon format
+3. evidence-graded
+4. revised with source-backed biological interpretation
+5. exported as modular YAML definitions
+
+This is especially important because the legacy files originated during a prior GSI-era work context.
+
+---
+
+## Planned v0.1 seed modules
+
+### Plants
 - BADH2 / 2-acetyl-1-pyrroline aroma module
+- Anthocyanin pigmentation core module
+- Carotenoid pigmentation core module
+- HKT/SOS salt tolerance module
+- DREB/RD29A drought response module
+- Lignin biosynthesis / wood density module
+- Cuticle wax biosynthesis module
+- Root architecture / auxin transport module
+- Floral surface / Rafflesia wart exploratory morphology module
 
-### Pigmentation
+### Algae
+- Chlorophyll / carotenoid / phycobilin pigment module
+- Lipid biosynthesis / biofuel module
+- Carbon fixation / carbonic anhydrase module
+- Heavy metal detoxification / phytochelatin module
 
-- Anthocyanin core module
-- Carotenoid core module
-- Betalain core module
-- Flavonol/yellow pigmentation module
-- Chlorophyll-loss/unmasking module
-
-### Morphology
-
-- Epidermal patterning module
-- Floral surface development module
-- Cuticle development module
-- Cell wall remodeling module
-
-### Future categories
-
-- Stress tolerance
-- Cell wall architecture
-- Floral organ identity
-- Seed/grain quality
-- Plant architecture
-- Parasitic plant traits
-- Specialized metabolism
-- Domestication traits
-
----
-
-## Future command-line concept
-
-A future TraitLexicon resolver may allow commands such as:
-
-```bash
-traitlexicon resolve "red color" --organ flower --taxon Arabidopsis
-```
-
-Possible output:
-
-```yaml
-query: red color
-context:
-  taxon: Arabidopsis
-  organ: flower
-
-recommended_modules:
-  - anthocyanin_core_module
-
-secondary_modules:
-  - flavonol_yellow_module
-
-excluded_or_lower_priority_modules:
-  - carotenoid_core_module
-  - betalain_core_module
-  - chlorophyll_loss_unmasking_module
-
-note: >
-  For Arabidopsis floral red/purple pigmentation, anthocyanin-related modules
-  are prioritized over carotenoid or betalain modules.
-```
+### Fungi
+- PKS/NRPS secondary metabolite module
+- Industrial enzyme production module
+- Fermentation / ADH-PDC module
+- Biocontrol / chitinase module
+- Remediation / laccase-detoxification module
 
 ---
 
 ## Roadmap
 
-### v0.1 — Curated dictionary seed
+### v0.1 — Seed concept and curated skeleton
+- define README and project identity
+- define trait-entry format
+- define module-definition format
+- create first seed YAML examples
+- establish plants/algae/fungi directory structure
 
-- Define trait entry format
-- Define module definition format
-- Add initial YAML examples
-- Add curation guidelines
-- Add seed modules for aroma, pigmentation, and Rafflesia floral surface traits
+### v0.2 — Curation framework
+- add controlled vocabularies
+- add curation guidelines
+- add evidence-level documentation
+- add legacy-seed conversion rules
+- add JSON schemas
 
-### v0.2 — Validation layer
+### v0.3 — First resolver prototype
+- add basic phrase-to-module resolver
+- support optional context fields:
+  - taxon
+  - tissue
+  - organ
+  - developmental stage
+  - phenotype context
 
-- Add JSON schemas
-- Add YAML validation script
-- Add basic tests for required fields
-- Add controlled vocabulary for evidence levels and trait categories
+Example future usage:
 
-### v0.3 — Trait resolver prototype
+```bash
+traitlexicon resolve "red color" --taxon Arabidopsis --organ flower
+```
 
-- Add command-line trait resolver
-- Resolve phrase to candidate modules
-- Support optional context such as taxon, organ, tissue, and developmental stage
+### v0.4 — PhenoSieve handoff
+- export TraitLexicon module definitions into PhenoSieve-compatible module files
+- test full TraitLexicon → PhenoSieve workflow
 
-### v0.4 — PhenoSieve export
-
-- Export module definitions in PhenoSieve-compatible format
-- Add `phenosieve_export.yaml`
-- Test TraitLexicon → PhenoSieve handoff
-
-### v0.5 — Expanded plant trait library
-
-- Add stress traits
-- Add cell wall traits
-- Add floral morphology traits
-- Add seed/grain quality traits
-- Add parasitic plant trait modules
+### v0.5 — Cross-kingdom seed expansion
+- expand algae trait coverage
+- expand fungi trait coverage
+- refine plant trait granularity
+- improve context-aware ambiguity handling
 
 ### v1.0 — Stable curated release
-
-- Stable schema
-- Versioned module library
-- Documentation
-- Example workflows
-- Citation file
-- Manuscript-ready description
+- stable schema
+- versioned module library
+- documented curation standards
+- example workflows
+- citation and manuscript-friendly structure
 
 ---
 
-## Suggested first commit sequence
+## Relationship to Pheno2Geno
 
-```bash
-git init
-git add README.md
-git commit -m "docs: initialize TraitLexicon concept"
+**TraitLexicon** should remain the name of this specific repository.
 
-mkdir -p data/traits/aroma data/traits/pigmentation data/traits/morphology
-mkdir -p data/modules/aroma data/modules/pigmentation data/modules/morphology
-mkdir -p docs examples schema tests
+**Pheno2Geno** is better reserved as a future umbrella ecosystem name.
 
-git add data docs examples schema tests
-git commit -m "chore: add initial repository structure"
+Possible future ecosystem:
 
-git add data/traits/aroma/fragrant_rice.yaml
-git add data/modules/aroma/badh2_2ap_aroma.yaml
-git commit -m "data: add fragrant rice aroma seed module"
-
-git add data/traits/pigmentation/
-git add data/modules/pigmentation/
-git commit -m "data: add context-aware pigmentation seed modules"
-
-git add data/traits/morphology/rafflesia_warts.yaml
-git add data/modules/morphology/
-git commit -m "data: add exploratory Rafflesia floral surface modules"
+```text
+Pheno2Geno/
+├── TraitLexicon/
+├── PhenoSieve/
+├── downstream-ranking-tools/
+└── visualization-or-reporting-tools/
 ```
+
+This keeps TraitLexicon focused and conceptually clean.
 
 ---
 
 ## Author
 
-**Adhityo Wicaksono**  
-Plant molecular biologist and bioinformatician  
-Aether Biomics  
-Indonesia
+**Adhityo Wicaksono**
+
+TraitLexicon is being developed as part of a broader bioinformatics and comparative genomics toolkit vision linking trait interpretation, module curation, and downstream candidate sequence extraction.
 
 ---
 
-## AI assistance declaration
+## AI declaration
 
-This project concept, repository structure, README draft, and initial module-format design were developed with assistance from **OpenAI ChatGPT**, used as an AI writing, structuring, and brainstorming assistant.
+This repository concept, structure, and initial documentation were developed with assistance from **ChatGPT (OpenAI)** as an AI-supported writing, structuring, and brainstorming tool.
 
-The scientific direction, project framing, biological examples, and final responsibility for curation belong to the author. AI assistance was used to help organize ideas, improve documentation clarity, draft initial text, and propose structured formats for trait-to-module mapping.
+The human author is responsible for:
+- project direction
+- biological judgment
+- curation decisions
+- verification of scientific content
+- repository maintenance
+- final interpretation and public release
 
-All biological claims, module definitions, gene/pathway associations, and future curated entries should be manually reviewed, revised, and validated by the author or domain experts before scientific use, publication, or downstream analysis.
+AI assistance should be understood as a support tool for drafting and ideation, not as a substitute for expert biological validation.
 
 ---
 
-## Project status
+## Status
 
-Early-stage concept and curated data-structure design.
+Early-stage concept and curated data-framework initialization.
 
-TraitLexicon is currently intended for plant biology, comparative genomics, non-model organisms, and hypothesis-guided bioinformatics.
+TraitLexicon is currently intended as a structured upstream trait-to-module dictionary for **plants, algae, and fungi**, with downstream compatibility for tools such as **PhenoSieve**.
