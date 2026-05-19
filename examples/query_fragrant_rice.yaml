@@ -1,0 +1,32 @@
+query_id: TLX-QUERY-EXAMPLE-0001
+trait_phrase: fragrant rice
+
+context:
+  kingdom_scope: plant
+  taxon: Oryza sativa
+  organ: grain
+  tissue: endosperm
+  developmental_stage: mature grain
+
+expected_resolution:
+  primary_trait_entry: data/traits/plants/aroma/fragrant_rice.yaml
+  candidate_modules:
+    - module_id: TLX-MODULE-PLANT-AROMA-0001
+      module_name: badh2_2ap_aroma_module
+      expected_confidence: high
+      expected_relationship: primary_candidate_module
+
+expected_interpretation:
+  summary: >
+    In rice grain, fragrant or pandan-like aroma is expected to resolve primarily
+    to the BADH2 / 2-acetyl-1-pyrroline-associated aroma module.
+  caution: >
+    Aroma traits outside rice may involve different volatile biosynthetic pathways.
+
+phenosieve_handoff:
+  expected_module_file: data/modules/plants/aroma/badh2_2ap_aroma.yaml
+  expected_export_ready: true
+
+curation:
+  example_status: demonstration
+  version: 0.1.0

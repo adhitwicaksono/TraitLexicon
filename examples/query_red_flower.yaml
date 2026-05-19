@@ -1,0 +1,40 @@
+query_id: TLX-QUERY-EXAMPLE-0002
+trait_phrase: red flower
+
+context:
+  kingdom_scope: plant
+  organ: flower
+  tissue: petal
+  phenotype_context:
+    - red pigmentation
+    - floral color
+
+expected_resolution:
+  primary_trait_entry: data/traits/plants/pigmentation/red_color.yaml
+  candidate_modules:
+    - module_id: TLX-MODULE-PLANT-PIGMENT-0001
+      module_name: anthocyanin_core_module
+      expected_confidence: high
+      expected_relationship: primary_candidate_module
+
+    - module_id: TLX-MODULE-PLANT-PIGMENT-0002
+      module_name: carotenoid_core_module
+      expected_confidence: low
+      expected_relationship: cautionary_alternative_module
+
+expected_interpretation:
+  summary: >
+    In a flower/petal context, red pigmentation is expected to resolve primarily
+    to an anthocyanin-related module unless taxon-specific evidence suggests
+    carotenoid, betalain, or chlorophyll-loss context.
+  caution: >
+    Red color is an ambiguous trait phrase. TraitLexicon should preserve
+    alternative pigment modules when context is incomplete.
+
+phenosieve_handoff:
+  expected_module_file: data/modules/plants/pigmentation/anthocyanin_core.yaml
+  expected_export_ready: true
+
+curation:
+  example_status: demonstration
+  version: 0.1.0

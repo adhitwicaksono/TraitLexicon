@@ -1,0 +1,38 @@
+query_id: TLX-QUERY-EXAMPLE-0004
+trait_phrase: algal biofuel
+
+context:
+  kingdom_scope: algae
+  trait_application: biofuel
+  cellular_process:
+    - lipid accumulation
+    - triacylglycerol biosynthesis
+  cultivation_context:
+    - strain_screening
+    - bioresource_assessment
+
+expected_resolution:
+  primary_trait_entry: data/traits/algae/biofuel/algal_biofuel_lipid_production.yaml
+  candidate_modules:
+    - module_id: TLX-MODULE-ALGAE-BIOFUEL-0001
+      module_name: acc_dgat_lipid_biosynthesis_module
+      expected_confidence: medium
+      expected_relationship: pathway_level_candidate_module
+
+expected_interpretation:
+  summary: >
+    Algal biofuel is an applied trait phrase. TraitLexicon should translate it
+    into biological modules related to lipid biosynthesis, triacylglycerol
+    accumulation, and carbon allocation.
+  caution: >
+    A lipid biosynthesis module alone is not sufficient to predict industrial
+    biofuel performance. Biomass productivity, cultivation condition, harvesting,
+    and extraction feasibility also matter.
+
+phenosieve_handoff:
+  expected_module_file: data/modules/algae/biofuel/acc_dgat_lipid_biosynthesis.yaml
+  expected_export_ready: draft
+
+curation:
+  example_status: demonstration
+  version: 0.1.0

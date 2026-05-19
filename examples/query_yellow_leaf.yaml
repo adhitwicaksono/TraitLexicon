@@ -1,0 +1,43 @@
+query_id: TLX-QUERY-EXAMPLE-0003
+trait_phrase: yellow leaf
+
+context:
+  kingdom_scope: plant
+  organ: leaf
+  tissue: leaf_lamina
+  phenotype_context:
+    - yellow pigmentation
+    - possible chlorophyll loss
+  developmental_stage: unspecified
+
+expected_resolution:
+  primary_trait_entry: data/traits/plants/pigmentation/yellow_color.yaml
+  candidate_modules:
+    - module_id: TLX-MODULE-PLANT-PIGMENT-0003
+      module_name: chlorophyll_loss_unmasking_module
+      expected_confidence: context_dependent
+      expected_relationship: context_specific_candidate_module
+
+    - module_id: TLX-MODULE-PLANT-PIGMENT-0002
+      module_name: carotenoid_core_module
+      expected_confidence: medium
+      expected_relationship: pathway_level_candidate_module
+
+expected_interpretation:
+  summary: >
+    In a leaf context, yellow color may indicate chlorophyll loss, senescence,
+    nutrient stress, or unmasking of carotenoids rather than de novo yellow
+    pigment biosynthesis alone.
+  caution: >
+    Yellow pigmentation is strongly context-dependent. Developmental stage,
+    stress condition, and tissue type should be clarified when possible.
+
+phenosieve_handoff:
+  expected_combined_modules:
+    - data/modules/plants/pigmentation/chlorophyll_loss_unmasking.yaml
+    - data/modules/plants/pigmentation/carotenoid_core.yaml
+  expected_export_ready: draft
+
+curation:
+  example_status: demonstration
+  version: 0.1.0

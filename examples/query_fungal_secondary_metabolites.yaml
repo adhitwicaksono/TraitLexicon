@@ -1,0 +1,36 @@
+query_id: TLX-QUERY-EXAMPLE-0005
+trait_phrase: fungal antibiotic production
+
+context:
+  kingdom_scope: fungi
+  trait_application:
+    - pharmaceutical_discovery
+    - antimicrobial_discovery
+    - natural_product_biosynthesis
+  biological_process:
+    - secondary_metabolism
+    - biosynthetic_gene_cluster_activity
+
+expected_resolution:
+  primary_trait_entry: data/traits/fungi/secondary_metabolites/fungal_secondary_metabolite_production.yaml
+  candidate_modules:
+    - module_id: TLX-MODULE-FUNGI-SECMET-0001
+      module_name: pks_nrps_secondary_metabolite_module
+      expected_confidence: medium
+      expected_relationship: pathway_level_candidate_module
+
+expected_interpretation:
+  summary: >
+    Fungal antibiotic production should resolve to secondary metabolite and
+    biosynthetic gene cluster modules, especially PKS and NRPS-related modules.
+  caution: >
+    Presence of PKS/NRPS-like genes suggests biosynthetic potential, not
+    guaranteed production of a specific antibiotic under all culture conditions.
+
+phenosieve_handoff:
+  expected_module_file: data/modules/fungi/secondary_metabolites/pks_nrps_secondary_metabolite.yaml
+  expected_export_ready: draft
+
+curation:
+  example_status: demonstration
+  version: 0.1.0

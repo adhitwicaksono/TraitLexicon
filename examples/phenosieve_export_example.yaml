@@ -1,0 +1,64 @@
+export_id: TLX-PHENOSIEVE-EXPORT-EXAMPLE-0001
+source_module_id: TLX-MODULE-PLANT-AROMA-0001
+module_name: badh2_2ap_aroma_module
+display_name: BADH2 / 2-acetyl-1-pyrroline aroma module
+kingdom_scope: plant
+
+description: >
+  Example PhenoSieve-compatible export for a TraitLexicon module.
+  This example shows how a curated module definition could be transformed
+  into downstream query terms for sequence extraction and module statistics.
+
+query_terms:
+  gene_symbols:
+    - BADH2
+    - BADH1
+  keywords:
+    - betaine aldehyde dehydrogenase
+    - aldehyde dehydrogenase
+    - fragrance
+    - aroma
+    - 2-acetyl-1-pyrroline
+  domains:
+    - aldehyde dehydrogenase domain
+  go_terms: []
+  kegg_terms: []
+
+recommended_inputs:
+  annotation_files:
+    - GFF3
+    - functional_annotation_table
+    - BLAST_or_DIAMOND_annotation
+    - InterProScan_annotation
+  orthogroups:
+    - OrthoFinder_Orthogroups.tsv
+  fasta:
+    - protein_fasta
+    - coding_sequence_fasta
+    - gene_sequence_fasta
+
+expected_outputs:
+  - extracted_module_sequences.fasta
+  - module_presence_absence_table.tsv
+  - module_copy_number_summary.tsv
+  - module_annotation_hits.tsv
+  - module_warning_report.md
+
+interpretation_rules:
+  expected_copy_behavior: >
+    BADH-like genes may occur as paralogs. BADH2-specific interpretation should
+    consider orthology, gene-tree context, reciprocal similarity, or synteny when possible.
+  caution: >
+    A BADH-like annotation alone is not sufficient to confirm a BADH2 ortholog.
+
+warnings:
+  - This is a demonstration export, not a fully literature-verified PhenoSieve module.
+  - Downstream extraction should distinguish BADH2-like candidates from other aldehyde dehydrogenase family members.
+  - Biological interpretation should remain taxon- and context-aware.
+
+curation:
+  status: seed
+  version: 0.1.0
+  needs_literature_verification: true
+  ai_assisted: true
+  human_review_required: true
