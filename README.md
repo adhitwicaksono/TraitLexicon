@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/traitlexicon_banner.png" alt="TraitLexicon banner" width="100%">
+  <img src="assets/traitlexicon_bannerV2.png" alt="TraitLexicon banner" width="100%">
 </p>
 
 # TraitLexicon
