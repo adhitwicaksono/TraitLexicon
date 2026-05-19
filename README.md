@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/traitlexicon_banner.png" alt="TraitLexicon banner" width="100%">
+</p>
+
 # TraitLexicon
 
 **TraitLexicon** is a curated, context-aware trait-to-module dictionary that translates human-readable biological trait phrases into standardized candidate gene/pathway modules.
