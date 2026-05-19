@@ -1,0 +1,35 @@
+# Recommended context fields for trait entries and module definitions.
+
+recommended_context_fields:
+  - taxon
+  - kingdom_scope
+  - organ
+  - tissue
+  - cell_type
+  - developmental_stage
+  - stress_condition
+  - environment
+  - phenotype_context
+  - trait_application
+  - cultivation_context
+  - assay_context
+
+examples:
+  taxon:
+    - Oryza sativa
+    - Chlorella
+    - Aspergillus
+  organ:
+    - grain
+    - flower
+    - leaf
+    - root
+  tissue:
+    - epidermis
+    - fruit_flesh
+    - fungal_mycelium
+  trait_application:
+    - biofuel
+    - remediation
+    - nutraceutical
+    - biocontrol

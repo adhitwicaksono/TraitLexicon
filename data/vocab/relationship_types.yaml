@@ -1,0 +1,19 @@
+# Recommended relationship labels between a trait entry and a candidate module.
+
+allowed_values:
+  - primary_candidate_module
+  - pathway_level_candidate_module
+  - supporting_candidate_module
+  - context_specific_candidate_module
+  - paralog_context_module
+  - exploratory_candidate_module
+  - cautionary_alternative_module
+
+definitions:
+  primary_candidate_module: "Main recommended module for the trait context."
+  pathway_level_candidate_module: "Trait maps to a pathway rather than one gene."
+  supporting_candidate_module: "Secondary module that may support interpretation."
+  context_specific_candidate_module: "Relevant only under specific taxon/tissue/phenotype context."
+  paralog_context_module: "Useful for distinguishing paralogs or gene-family context."
+  exploratory_candidate_module: "Hypothesis-generating candidate module."
+  cautionary_alternative_module: "Alternative explanation that should be considered."

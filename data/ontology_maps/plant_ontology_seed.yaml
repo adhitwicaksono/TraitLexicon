@@ -1,0 +1,31 @@
+# Seed Plant Ontology mapping file.
+# This is a starter vocabulary for plant organs/tissues used in context rules.
+
+plant_organ_terms:
+  grain:
+    synonyms:
+      - seed
+      - caryopsis
+    status: needs_po_id_verification
+
+  flower:
+    synonyms:
+      - floral organ
+      - blossom
+    status: needs_po_id_verification
+
+  leaf:
+    synonyms:
+      - foliage
+    status: needs_po_id_verification
+
+  root:
+    synonyms:
+      - root system
+    status: needs_po_id_verification
+
+  fruit:
+    synonyms:
+      - fruit tissue
+      - pericarp
+    status: needs_po_id_verification

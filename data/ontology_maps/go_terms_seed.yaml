@@ -1,0 +1,32 @@
+# Seed GO term mapping file.
+# This file is intentionally incomplete and should be expanded through literature-backed curation.
+
+go_seed_mappings:
+  anthocyanin_core_module:
+    suggested_terms:
+      - "anthocyanin-containing compound biosynthetic process"
+      - "flavonoid biosynthetic process"
+    status: needs_go_id_verification
+
+  carotenoid_core_module:
+    suggested_terms:
+      - "carotenoid biosynthetic process"
+    status: needs_go_id_verification
+
+  salt_tolerance_module:
+    suggested_terms:
+      - "response to salt stress"
+      - "sodium ion transport"
+    status: needs_go_id_verification
+
+  lipid_biosynthesis_module:
+    suggested_terms:
+      - "fatty acid biosynthetic process"
+      - "triacylglycerol biosynthetic process"
+    status: needs_go_id_verification
+
+  fungal_secondary_metabolite_module:
+    suggested_terms:
+      - "secondary metabolic process"
+      - "polyketide biosynthetic process"
+    status: needs_go_id_verification

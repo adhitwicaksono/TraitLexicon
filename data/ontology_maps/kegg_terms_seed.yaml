@@ -1,0 +1,32 @@
+# Seed KEGG mapping file.
+# KEGG identifiers should be verified manually before publication-level use.
+
+kegg_seed_mappings:
+  anthocyanin_core_module:
+    suggested_pathways:
+      - flavonoid biosynthesis
+      - anthocyanin biosynthesis
+    status: needs_kegg_id_verification
+
+  carotenoid_core_module:
+    suggested_pathways:
+      - carotenoid biosynthesis
+    status: needs_kegg_id_verification
+
+  badh2_2ap_aroma_module:
+    suggested_pathways:
+      - amino acid metabolism
+      - proline metabolism
+      - aldehyde metabolism
+    status: needs_context_specific_verification
+
+  lipid_biosynthesis_module:
+    suggested_pathways:
+      - fatty acid biosynthesis
+      - glycerolipid metabolism
+    status: needs_kegg_id_verification
+
+  pks_nrps_secondary_metabolite_module:
+    suggested_pathways:
+      - biosynthesis of secondary metabolites
+    status: needs_kegg_id_verification

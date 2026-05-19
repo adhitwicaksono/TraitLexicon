@@ -1,0 +1,60 @@
+# Seed synonym dictionary for natural-language trait phrase resolution.
+# This is a starter vocabulary, not a final ontology.
+
+synonyms:
+  fragrant_rice:
+    canonical_name: fragrant rice
+    phrases:
+      - fragrant rice
+      - aromatic rice
+      - scented rice
+      - pandan-like rice aroma
+      - rice aroma
+
+  red_color:
+    canonical_name: red color
+    phrases:
+      - red color
+      - red pigmentation
+      - red flower
+      - red fruit
+      - red leaf
+      - red stem
+      - red pericarp
+
+  yellow_color:
+    canonical_name: yellow color
+    phrases:
+      - yellow color
+      - yellow pigmentation
+      - yellow flower
+      - yellow fruit
+      - yellow leaf
+      - golden color
+      - orange-yellow color
+
+  salt_tolerance:
+    canonical_name: salt tolerance
+    phrases:
+      - salt tolerance
+      - salinity tolerance
+      - sodium stress tolerance
+      - salt stress response
+
+  algal_biofuel:
+    canonical_name: algal biofuel lipid production
+    phrases:
+      - algal biofuel
+      - lipid-rich algae
+      - algal oil production
+      - triacylglycerol accumulation
+      - TAG accumulation
+
+  fungal_secondary_metabolites:
+    canonical_name: fungal secondary metabolite production
+    phrases:
+      - fungal secondary metabolites
+      - fungal antibiotic production
+      - fungal bioactive compounds
+      - fungal polyketides
+      - fungal nonribosomal peptides

@@ -1,0 +1,17 @@
+# Controlled vocabulary for curation.status.
+
+allowed_values:
+  - seed
+  - seed_recurated_from_legacy_catalog
+  - needs_literature_verification
+  - literature_supported
+  - reviewed
+  - deprecated
+
+definitions:
+  seed: "First-pass entry manually drafted."
+  seed_recurated_from_legacy_catalog: "Rewritten from older seed material."
+  needs_literature_verification: "Biologically plausible, but references still needed."
+  literature_supported: "Supported by curated literature."
+  reviewed: "Checked for formatting, evidence, and biological logic."
+  deprecated: "Kept for history but no longer recommended."

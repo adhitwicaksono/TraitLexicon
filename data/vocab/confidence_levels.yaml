@@ -1,0 +1,15 @@
+# Controlled vocabulary for candidate module confidence labels inside trait entries.
+
+allowed_values:
+  - high
+  - medium
+  - low
+  - exploratory
+  - context_dependent
+
+definitions:
+  high: "Likely module for the stated trait and context."
+  medium: "Plausible module, but context or evidence is incomplete."
+  low: "Weak candidate; include only with warnings."
+  exploratory: "Hypothesis-generating candidate."
+  context_dependent: "Confidence depends strongly on taxon, tissue, organ, developmental stage, or phenotype context."

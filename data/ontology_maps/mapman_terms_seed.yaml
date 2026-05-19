@@ -1,0 +1,26 @@
+# Seed MapMan-style term mapping.
+# These are broad bins and should be reviewed for exact MapMan compatibility.
+
+mapman_seed_bins:
+  anthocyanin_core_module:
+    suggested_bins:
+      - secondary metabolism.flavonoids
+      - secondary metabolism.phenylpropanoids
+    status: needs_mapman_verification
+
+  carotenoid_core_module:
+    suggested_bins:
+      - secondary metabolism.isoprenoids.carotenoids
+    status: needs_mapman_verification
+
+  salt_tolerance_module:
+    suggested_bins:
+      - transport.ions
+      - stress.abiotic.salt
+    status: needs_mapman_verification
+
+  cell_wall_remodeling_module:
+    suggested_bins:
+      - cell wall
+      - cell wall.modification
+    status: needs_mapman_verification

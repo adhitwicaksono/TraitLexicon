@@ -1,0 +1,35 @@
+# Seed Plant Trait Ontology mapping file.
+# Trait Ontology IDs should be verified before formal release.
+
+plant_trait_seed_mappings:
+  flowering_time:
+    suggested_trait_terms:
+      - flowering time
+      - photoperiodic flowering
+    status: needs_trait_ontology_id_verification
+
+  salt_tolerance:
+    suggested_trait_terms:
+      - salinity tolerance
+      - salt stress response
+    status: needs_trait_ontology_id_verification
+
+  drought_tolerance:
+    suggested_trait_terms:
+      - drought tolerance
+      - water deficit response
+    status: needs_trait_ontology_id_verification
+
+  pigment_color:
+    suggested_trait_terms:
+      - flower color
+      - fruit color
+      - leaf color
+    status: needs_trait_ontology_id_verification
+
+  root_architecture:
+    suggested_trait_terms:
+      - root length
+      - lateral root density
+      - root hair density
+    status: needs_trait_ontology_id_verification

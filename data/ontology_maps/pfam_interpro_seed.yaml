@@ -1,0 +1,41 @@
+# Seed Pfam/InterPro-style domain mapping.
+# Exact IDs should be verified manually.
+
+domain_seed_mappings:
+  aldehyde_dehydrogenase:
+    related_modules:
+      - badh2_2ap_aroma_module
+    suggested_terms:
+      - aldehyde dehydrogenase domain
+    status: needs_pfam_interpro_id_verification
+
+  chalcone_synthase:
+    related_modules:
+      - anthocyanin_core_module
+    suggested_terms:
+      - chalcone synthase
+      - type III polyketide synthase
+    status: needs_pfam_interpro_id_verification
+
+  phytoene_synthase:
+    related_modules:
+      - carotenoid_core_module
+    suggested_terms:
+      - phytoene synthase
+    status: needs_pfam_interpro_id_verification
+
+  polyketide_synthase:
+    related_modules:
+      - pks_nrps_secondary_metabolite_module
+    suggested_terms:
+      - polyketide synthase
+    status: needs_pfam_interpro_id_verification
+
+  nonribosomal_peptide_synthetase:
+    related_modules:
+      - pks_nrps_secondary_metabolite_module
+    suggested_terms:
+      - nonribosomal peptide synthetase
+      - adenylation domain
+      - condensation domain
+    status: needs_pfam_interpro_id_verification

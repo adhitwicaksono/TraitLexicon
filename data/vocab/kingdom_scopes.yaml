@@ -1,0 +1,13 @@
+# Controlled vocabulary for TraitLexicon kingdom_scope values.
+
+allowed_values:
+  - plant
+  - algae
+  - fungi
+  - cross_kingdom
+
+notes:
+  plant: "Land plants and plant-focused entries."
+  algae: "Microalgae, macroalgae, and algal bioresource entries."
+  fungi: "Fungal entries including yeasts, filamentous fungi, and mycorrhizal fungi."
+  cross_kingdom: "Use only when a module intentionally spans more than one kingdom scope."

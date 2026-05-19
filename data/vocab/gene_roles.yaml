@@ -1,0 +1,27 @@
+# Controlled vocabulary for gene expected_role values.
+
+allowed_values:
+  - primary_candidate
+  - pathway_core
+  - pathway_supporting
+  - regulator
+  - transporter
+  - enzyme
+  - structural_component
+  - paralog_context
+  - marker_candidate
+  - domain_anchor
+  - placeholder_requires_review
+
+definitions:
+  primary_candidate: "Main gene candidate for the module."
+  pathway_core: "Core gene in the relevant pathway."
+  pathway_supporting: "Supporting pathway gene."
+  regulator: "Regulatory gene or transcription factor."
+  transporter: "Transport-related gene."
+  enzyme: "Enzymatic component."
+  structural_component: "Structural or cell-wall/surface component."
+  paralog_context: "Used to clarify gene-family or paralog relationships."
+  marker_candidate: "Useful marker but not necessarily causal."
+  domain_anchor: "Gene/domain used as an annotation-search anchor."
+  placeholder_requires_review: "Legacy or vague gene label requiring verification."

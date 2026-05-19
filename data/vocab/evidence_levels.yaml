@@ -1,0 +1,19 @@
+# Controlled vocabulary for evidence_level values.
+
+allowed_values:
+  - causal
+  - strong_association
+  - pathway_supported
+  - orthology_inferred
+  - expression_supported
+  - morphology_inferred
+  - exploratory
+
+definitions:
+  causal: "Direct functional evidence supports a causal role in the relevant trait context."
+  strong_association: "Strong genetic, QTL, GWAS, breeding, or phenotype association exists."
+  pathway_supported: "A known pathway plausibly produces or influences the trait."
+  orthology_inferred: "Candidate inferred from homologs or orthologs in related taxa."
+  expression_supported: "Candidate supported by transcriptomic, proteomic, or other omics evidence."
+  morphology_inferred: "Candidate inferred from developmental, anatomical, or morphological analogy."
+  exploratory: "Hypothesis-generating only; not validated."

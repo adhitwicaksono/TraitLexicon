@@ -1,0 +1,49 @@
+# Controlled vocabulary for broad TraitLexicon trait categories.
+# Categories may expand as the project grows.
+
+plant_categories:
+  - aroma
+  - pigmentation
+  - stress_tolerance
+  - disease_resistance
+  - morphology
+  - growth_development
+  - structural_material
+  - nutrition_flavor
+  - reproduction
+  - photosynthesis
+  - root_soil_interaction
+  - plant_microbe_interaction
+  - signal_processing
+  - immune_signaling
+
+algae_categories:
+  - pigments
+  - biofuel
+  - carbon_fixation
+  - remediation
+  - nutraceuticals
+  - bioactive_compounds
+  - environmental_tolerance
+  - aquaculture
+  - strain_optimization
+  - biocatalysts
+
+fungi_categories:
+  - secondary_metabolites
+  - enzymes
+  - fermentation
+  - organic_acids
+  - biocontrol
+  - remediation
+  - symbiosis
+  - environmental_tolerance
+  - biofuel
+  - biocompatibility
+
+cross_kingdom_categories:
+  - stress_response
+  - pigment_metabolism
+  - detoxification
+  - secondary_metabolism
+  - cell_wall_or_surface

@@ -1,0 +1,21 @@
+# Gene labels that should trigger caution during legacy seed conversion.
+# These may be too vague, generic, or context-poor unless independently verified.
+
+placeholder_like_terms:
+  - PRT1
+  - VITB
+  - MINR
+  - HYD1
+  - COLL
+  - FOB
+  - Protein 1
+  - Mineral Transporter
+  - Hydratase 1
+  - Fish Oil Biosynthesis Enzyme
+  - Collagen-like Protein
+
+recommended_action:
+  - Do not use as high-confidence core genes without verification.
+  - Move to curation_notes if identity is ambiguous.
+  - Prefer pathway keywords or verified gene-family names.
+  - Mark entry as needs_literature_verification.
